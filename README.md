@@ -1,10 +1,10 @@
 # Malachit
 QT Bluetooth with Microbit project
   
-  **Team Members:**
+**Team Members:**
 * Robert Winke
 * Mazsi Javorszky
 * Kinga Magyar
-  
-  **Mentor:**
-  Tojas aka Tamas Kokeny
+
+**Mentor:**
+Tojas aka Tamas Kokeny
