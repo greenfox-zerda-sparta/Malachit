@@ -2,9 +2,9 @@
 QT Bluetooth with Microbit project
 
 Team Members:
-Robert Winke
-Mazsi Javorszky
+Róbert Winke
+Mazsi Jávorszky
 Kinga Magyar
 
 Mentor:
-Tojas aka Tamas Kokeny
+Tojás aka Tamás Kökény
