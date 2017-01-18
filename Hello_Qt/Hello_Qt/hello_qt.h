@@ -14,6 +14,8 @@ public:
 
 private:
 	Ui::Hello_QtClass ui;
+private slots:
+	void exit();
 };
 
 #endif // HELLO_QT_H

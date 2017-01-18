@@ -1,7 +1,2 @@
-﻿  Uic'ing hello_qt.ui...
-  moc_hello_qt.cpp
-  hello_qt.cpp
-  main.cpp
-  Generating Code...
-  Hello_Qt.vcxproj -> c:\Users\Kinga\documents\visual studio 2015\Projects\Hello_Qt\x64\Debug\Hello_Qt.exe
-  Hello_Qt.vcxproj -> c:\Users\Kinga\documents\visual studio 2015\Projects\Hello_Qt\x64\Debug\Hello_Qt.pdb (Full PDB)
+﻿  Hello_Qt.vcxproj -> E:\greenfox\Malachit\Hello_Qt\x64\Debug\Hello_Qt.exe
+  Hello_Qt.vcxproj -> E:\greenfox\Malachit\Hello_Qt\x64\Debug\Hello_Qt.pdb (Full PDB)
