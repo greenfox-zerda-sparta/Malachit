@@ -1,2 +1,13 @@
-﻿  Hello_Qt.vcxproj -> E:\greenfox\Malachit\Hello_Qt\x64\Debug\Hello_Qt.exe
-  Hello_Qt.vcxproj -> E:\greenfox\Malachit\Hello_Qt\x64\Debug\Hello_Qt.pdb (Full PDB)
+﻿  Moc'ing hello_qt.h...
+  Uic'ing hello_qt.ui...
+  Rcc'ing hello_qt.qrc...
+RCC : warning : No resources in 'C:\Users\Kinga\Malachit\Hello_Qt\Hello_Qt\hello_qt.qrc'.
+  
+  moc_hello_qt.cpp
+  hello_qt.cpp
+  main.cpp
+  Generating Code...
+  qrc_hello_qt.cpp
+  LINK : C:\Users\Kinga\Malachit\Hello_Qt\x64\Debug\\Hello_Qt.exe not found or not built by the last incremental link; performing full link
+  Hello_Qt.vcxproj -> C:\Users\Kinga\Malachit\Hello_Qt\x64\Debug\Hello_Qt.exe
+  Hello_Qt.vcxproj -> C:\Users\Kinga\Malachit\Hello_Qt\x64\Debug\Hello_Qt.pdb (Full PDB)
