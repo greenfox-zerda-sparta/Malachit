@@ -10,7 +10,8 @@ Matrix::~Matrix()
 {
 
 }
-void Matrix::fillQVector() {
+void Matrix::fillQVector() 
+{
 	vector.resize(5);
 	for (unsigned int i = 0; i < vector.size(); ++i) {
 		for (unsigned int j = 0; j < vector.size(); ++j) {
