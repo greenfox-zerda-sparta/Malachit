@@ -17,9 +17,11 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "compass.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,6 +30,8 @@ class Ui_MicrobitMatrixClass
 public:
     QWidget *centralWidget;
     QPushButton *pushButton;
+    compass *widget;
+    QSlider *horizontalSlider;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -36,16 +40,24 @@ public:
     {
         if (MicrobitMatrixClass->objectName().isEmpty())
             MicrobitMatrixClass->setObjectName(QStringLiteral("MicrobitMatrixClass"));
-        MicrobitMatrixClass->resize(333, 393);
+        MicrobitMatrixClass->resize(600, 393);
         centralWidget = new QWidget(MicrobitMatrixClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(240, 310, 81, 31));
+        widget = new compass(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(339, 9, 251, 301));
+        horizontalSlider = new QSlider(widget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setGeometry(QRect(40, 250, 181, 22));
+        horizontalSlider->setMaximum(360);
+        horizontalSlider->setOrientation(Qt::Horizontal);
         MicrobitMatrixClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MicrobitMatrixClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 333, 21));
+        menuBar->setGeometry(QRect(0, 0, 600, 21));
         MicrobitMatrixClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MicrobitMatrixClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

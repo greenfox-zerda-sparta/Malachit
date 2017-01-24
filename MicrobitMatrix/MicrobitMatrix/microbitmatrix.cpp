@@ -6,6 +6,7 @@ MicrobitMatrix::MicrobitMatrix(QWidget *parent)
   ui.setupUi(this);
   fillQVector();  
   connect(ui.pushButton, SIGNAL(clicked()), this, SLOT(exit()));
+  connect(ui.horizontalSlider, SIGNAL(valueChanged(int)), ui.widget, SLOT(setHeading(int)));
 }
 
 MicrobitMatrix::~MicrobitMatrix()
