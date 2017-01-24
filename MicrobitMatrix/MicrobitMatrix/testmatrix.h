@@ -11,5 +11,5 @@ public:
   TestMatrix(QObject * parent = Q_NULLPTR);  
 
 private slots:
-  void test_is_there_is_twentyfive_buttons();
+  void test_if_there_is_twentyfive_buttons();
 };
