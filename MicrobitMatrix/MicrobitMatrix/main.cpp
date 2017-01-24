@@ -1,7 +1,7 @@
 #ifdef _TEST
 
 #include <QtTest>
-#include "testmatrix.hpp"
+#include "testmatrix.h"
 
 int main(int argc, char** argv) {
   QApplication app(argc, argv);
