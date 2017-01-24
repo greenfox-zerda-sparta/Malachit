@@ -1,3 +1,17 @@
+#ifdef _TEST
+
+#include <QtTest>
+#include "testmatrix.hpp"
+
+int main(int argc, char** argv) {
+  QApplication app(argc, argv);
+  TestMatrix testMatrix;
+  return QTest::qExec(&testMatrix, argc, argv);
+}
+
+#endif
+
+#ifndef _TEST
 #include "microbitmatrix.h"
 #include <QtWidgets/QApplication>
 
@@ -8,3 +22,5 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+#endif
