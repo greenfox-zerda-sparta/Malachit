@@ -29,14 +29,14 @@ void MainWindow::showAccelerometerPage() {
 void MainWindow::setupConnections() 
 {
 	connect(ui.actionMatrix, &QAction::triggered, this, &MainWindow::showMatrixPage);
-  connect(ui.actionCompass, &QAction::triggered, this, &MainWindow::showCompassPage);
-  connect(ui.actionAccelerometer, &QAction::triggered, this, &MainWindow::showAccelerometerPage);
+    connect(ui.actionCompass, &QAction::triggered, this, &MainWindow::showCompassPage);
+	connect(ui.actionAccelerometer, &QAction::triggered, this, &MainWindow::showAccelerometerPage);
 
 	connect(ui.matrixButton, SIGNAL(clicked()), this, SLOT(showMatrixPage()));
-  connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
-  connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
+	connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
+	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
-  connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+	connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 }
 
 void MainWindow::exit() 
