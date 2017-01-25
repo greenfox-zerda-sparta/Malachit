@@ -14,16 +14,20 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "accelerometer.h"
 #include "compass.h"
 #include "matrix.h"
 
@@ -34,22 +38,26 @@ class Ui_MainWindowClass
 public:
     QAction *actionMatrix;
     QAction *actionCompass;
+    QAction *actionAccelerometer;
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout_2;
     QStackedWidget *stackedWidget;
     QWidget *matrixPage;
-    QGridLayout *gridLayout_2;
+    QGridLayout *gridLayout;
     Matrix *matrixWidget;
-    QPushButton *compassButton;
-    QPushButton *accelerometerButton;
-    QPushButton *exitButton;
     QWidget *compassPage;
-    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout;
     Compass *compassWidget;
-    QSlider *horizontalSlider;
-    QPushButton *exitButton_2;
-    QPushButton *accelerometerButton_2;
+    QSlider *compassSlider;
+    QWidget *accelerometerPage;
+    QGridLayout *gridLayout_4;
+    Accelerometer *accelerometerWidget;
+    QHBoxLayout *horizontalLayout;
     QPushButton *matrixButton;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *compassButton;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *accelerometerButton;
     QMenuBar *menuBar;
     QMenu *menuDevices;
     QToolBar *mainToolBar;
@@ -59,78 +67,98 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(382, 497);
+        MainWindowClass->resize(401, 511);
         actionMatrix = new QAction(MainWindowClass);
         actionMatrix->setObjectName(QStringLiteral("actionMatrix"));
         actionCompass = new QAction(MainWindowClass);
         actionCompass->setObjectName(QStringLiteral("actionCompass"));
+        actionAccelerometer = new QAction(MainWindowClass);
+        actionAccelerometer->setObjectName(QStringLiteral("actionAccelerometer"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        verticalLayout_2 = new QVBoxLayout(centralWidget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
         matrixPage = new QWidget();
         matrixPage->setObjectName(QStringLiteral("matrixPage"));
-        gridLayout_2 = new QGridLayout(matrixPage);
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout = new QGridLayout(matrixPage);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         matrixWidget = new Matrix(matrixPage);
         matrixWidget->setObjectName(QStringLiteral("matrixWidget"));
-        compassButton = new QPushButton(matrixWidget);
-        compassButton->setObjectName(QStringLiteral("compassButton"));
-        compassButton->setGeometry(QRect(220, 350, 91, 23));
-        accelerometerButton = new QPushButton(matrixWidget);
-        accelerometerButton->setObjectName(QStringLiteral("accelerometerButton"));
-        accelerometerButton->setGeometry(QRect(20, 350, 91, 23));
-        exitButton = new QPushButton(matrixWidget);
-        exitButton->setObjectName(QStringLiteral("exitButton"));
-        exitButton->setGeometry(QRect(130, 350, 75, 23));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(exitButton->sizePolicy().hasHeightForWidth());
-        exitButton->setSizePolicy(sizePolicy);
 
-        gridLayout_2->addWidget(matrixWidget, 0, 0, 1, 1);
+        gridLayout->addWidget(matrixWidget, 0, 0, 1, 1);
 
         stackedWidget->addWidget(matrixPage);
         compassPage = new QWidget();
         compassPage->setObjectName(QStringLiteral("compassPage"));
-        gridLayout_3 = new QGridLayout(compassPage);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        verticalLayout = new QVBoxLayout(compassPage);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         compassWidget = new Compass(compassPage);
         compassWidget->setObjectName(QStringLiteral("compassWidget"));
-        horizontalSlider = new QSlider(compassWidget);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setGeometry(QRect(100, 40, 160, 22));
-        horizontalSlider->setMaximum(360);
-        horizontalSlider->setOrientation(Qt::Horizontal);
-        exitButton_2 = new QPushButton(compassWidget);
-        exitButton_2->setObjectName(QStringLiteral("exitButton_2"));
-        exitButton_2->setGeometry(QRect(130, 350, 75, 23));
-        accelerometerButton_2 = new QPushButton(compassWidget);
-        accelerometerButton_2->setObjectName(QStringLiteral("accelerometerButton_2"));
-        accelerometerButton_2->setGeometry(QRect(220, 350, 91, 23));
-        matrixButton = new QPushButton(compassWidget);
-        matrixButton->setObjectName(QStringLiteral("matrixButton"));
-        matrixButton->setGeometry(QRect(30, 350, 75, 23));
+        compassSlider = new QSlider(compassWidget);
+        compassSlider->setObjectName(QStringLiteral("compassSlider"));
+        compassSlider->setGeometry(QRect(100, 40, 160, 22));
+        compassSlider->setMaximum(360);
+        compassSlider->setOrientation(Qt::Horizontal);
 
-        gridLayout_3->addWidget(compassWidget, 0, 0, 1, 1);
+        verticalLayout->addWidget(compassWidget);
 
         stackedWidget->addWidget(compassPage);
+        accelerometerPage = new QWidget();
+        accelerometerPage->setObjectName(QStringLiteral("accelerometerPage"));
+        gridLayout_4 = new QGridLayout(accelerometerPage);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        accelerometerWidget = new Accelerometer(accelerometerPage);
+        accelerometerWidget->setObjectName(QStringLiteral("accelerometerWidget"));
 
-        gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
+        gridLayout_4->addWidget(accelerometerWidget, 0, 0, 1, 1);
+
+        stackedWidget->addWidget(accelerometerPage);
+
+        verticalLayout_2->addWidget(stackedWidget);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        matrixButton = new QPushButton(centralWidget);
+        matrixButton->setObjectName(QStringLiteral("matrixButton"));
+
+        horizontalLayout->addWidget(matrixButton);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        compassButton = new QPushButton(centralWidget);
+        compassButton->setObjectName(QStringLiteral("compassButton"));
+
+        horizontalLayout->addWidget(compassButton);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
+
+        accelerometerButton = new QPushButton(centralWidget);
+        accelerometerButton->setObjectName(QStringLiteral("accelerometerButton"));
+
+        horizontalLayout->addWidget(accelerometerButton);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 382, 21));
+        menuBar->setGeometry(QRect(0, 0, 401, 21));
         menuDevices = new QMenu(menuBar);
         menuDevices->setObjectName(QStringLiteral("menuDevices"));
         MainWindowClass->setMenuBar(menuBar);
@@ -144,23 +172,25 @@ public:
         menuBar->addAction(menuDevices->menuAction());
         menuDevices->addAction(actionMatrix);
         menuDevices->addAction(actionCompass);
+        menuDevices->addAction(actionAccelerometer);
 
         retranslateUi(MainWindowClass);
+
+        stackedWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(MainWindowClass);
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindowClass)
     {
-        MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "MainWindow", Q_NULLPTR));
+        MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "Micro:bit Controller", Q_NULLPTR));
         actionMatrix->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
         actionCompass->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
-        compassButton->setText(QApplication::translate("MainWindowClass", "Compass->", Q_NULLPTR));
-        accelerometerButton->setText(QApplication::translate("MainWindowClass", "<-Accelerometer", Q_NULLPTR));
-        exitButton->setText(QApplication::translate("MainWindowClass", "Exit", Q_NULLPTR));
-        exitButton_2->setText(QApplication::translate("MainWindowClass", "Exit", Q_NULLPTR));
-        accelerometerButton_2->setText(QApplication::translate("MainWindowClass", "Accelerometer->", Q_NULLPTR));
-        matrixButton->setText(QApplication::translate("MainWindowClass", "<- Matrix", Q_NULLPTR));
+        actionAccelerometer->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
+        matrixButton->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
+        compassButton->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
+        accelerometerButton->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
         menuDevices->setTitle(QApplication::translate("MainWindowClass", "Devices", Q_NULLPTR));
     } // retranslateUi
 

@@ -21,6 +21,7 @@ private slots:
 	void exit();
 	void showCompassPage();
 	void showMatrixPage();
+  void showAccelerometerPage();
 };
 
 #endif // MAINWINDOW_H

@@ -68,6 +68,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_matrix.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="accelerometer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_accelerometer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_accelerometer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -83,6 +92,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="matrix.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="accelerometer.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
