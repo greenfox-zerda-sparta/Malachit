@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -39,6 +40,7 @@ public:
     QAction *actionMatrix;
     QAction *actionCompass;
     QAction *actionAccelerometer;
+    QAction *actionQCustomPlot;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QStackedWidget *stackedWidget;
@@ -52,6 +54,9 @@ public:
     QWidget *accelerometerPage;
     QGridLayout *gridLayout_4;
     Accelerometer *accelerometerWidget;
+    QDoubleSpinBox *doubleSpinBox;
+    QDoubleSpinBox *doubleSpinBox_2;
+    QDoubleSpinBox *doubleSpinBox_3;
     QHBoxLayout *horizontalLayout;
     QPushButton *matrixButton;
     QSpacerItem *horizontalSpacer;
@@ -74,6 +79,8 @@ public:
         actionCompass->setObjectName(QStringLiteral("actionCompass"));
         actionAccelerometer = new QAction(MainWindowClass);
         actionAccelerometer->setObjectName(QStringLiteral("actionAccelerometer"));
+        actionQCustomPlot = new QAction(MainWindowClass);
+        actionQCustomPlot->setObjectName(QStringLiteral("actionQCustomPlot"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
@@ -119,6 +126,18 @@ public:
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         accelerometerWidget = new Accelerometer(accelerometerPage);
         accelerometerWidget->setObjectName(QStringLiteral("accelerometerWidget"));
+        doubleSpinBox = new QDoubleSpinBox(accelerometerWidget);
+        doubleSpinBox->setObjectName(QStringLiteral("doubleSpinBox"));
+        doubleSpinBox->setGeometry(QRect(20, 350, 62, 22));
+        doubleSpinBox->setMaximum(300);
+        doubleSpinBox_2 = new QDoubleSpinBox(accelerometerWidget);
+        doubleSpinBox_2->setObjectName(QStringLiteral("doubleSpinBox_2"));
+        doubleSpinBox_2->setGeometry(QRect(130, 350, 62, 22));
+        doubleSpinBox_2->setMaximum(300);
+        doubleSpinBox_3 = new QDoubleSpinBox(accelerometerWidget);
+        doubleSpinBox_3->setObjectName(QStringLiteral("doubleSpinBox_3"));
+        doubleSpinBox_3->setGeometry(QRect(250, 350, 62, 22));
+        doubleSpinBox_3->setMaximum(300);
 
         gridLayout_4->addWidget(accelerometerWidget, 0, 0, 1, 1);
 
@@ -176,7 +195,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -188,6 +207,7 @@ public:
         actionMatrix->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
         actionCompass->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
         actionAccelerometer->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
+        actionQCustomPlot->setText(QApplication::translate("MainWindowClass", "QCustomPlot", Q_NULLPTR));
         matrixButton->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
         compassButton->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
         accelerometerButton->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));

@@ -26,6 +26,7 @@ void MainWindow::showAccelerometerPage() {
   ui.stackedWidget->setCurrentWidget(ui.accelerometerPage);
 }
 
+
 void MainWindow::setupConnections() 
 {
 	connect(ui.actionMatrix, &QAction::triggered, this, &MainWindow::showMatrixPage);
@@ -37,6 +38,10 @@ void MainWindow::setupConnections()
   connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
   connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+
+  connect(ui.doubleSpinBox, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
+  connect(ui.doubleSpinBox_2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
+  connect(ui.doubleSpinBox_3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
 }
 
 void MainWindow::exit() 

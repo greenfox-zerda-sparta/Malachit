@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtGui>
+#include <QDoubleSpinBox>
 
 class Accelerometer : public QWidget
 {
@@ -11,17 +12,25 @@ class Accelerometer : public QWidget
 public:
     Accelerometer(QWidget *parent);
     ~Accelerometer();
-    
+    void drawBars();
+    void createAxisX();
+    void createAxisY();
+   
+
 private slots:
-void paintEvent(QPaintEvent *e);
-void setX(int x);
-void setY(int y);
-void setZ(int z);
+  void paintEvent(QPaintEvent *e);
+  void setHeightX(double x);
+  void setHeightY(double y);
+  void setHeightZ(double z);
+  void setWidthAll(double w);
+
 
 private:
-  int _x;
-  int _y;
-  int _z;
+  double m_HeightX;
+  double m_HeightY;
+  double m_HeightZ;
+  double m_WidthAll;
+
 };
 
 #endif // ACCELEROMETER_H
