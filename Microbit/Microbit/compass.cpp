@@ -17,16 +17,17 @@ void Compass::setHeading(int angle)
 }
 void Compass::paintEvent(QPaintEvent* e) 
 {
+	int offset = this->width();
 
-	static const QPoint azimutHand[3] = {
+  QPoint azimutHand[3] = {
 		QPoint(6, 7),
 		QPoint(-6, 7),
-		QPoint(0, -90)
+		QPoint(0, -offset/3)
 	};
 
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
-	painter.translate(this->width() / 2, this->height() / 2); 
+	painter.translate(offset / 2, offset / 2); 
 
 	painter.setPen(Qt::NoPen);
 	painter.setBrush(Qt::red);
@@ -46,7 +47,7 @@ void Compass::paintEvent(QPaintEvent* e)
 	painter.setPen(Qt::black);
 
 	for (int j = 0; j < 60; ++j) {
-		painter.drawLine(100, 0, 95, 0);
+		painter.drawLine(offset / 3, 0, offset / 3 - 5, 0);
 		painter.rotate(6.0);
 	}
 
