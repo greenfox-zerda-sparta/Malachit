@@ -52,48 +52,48 @@
        </layout>
       </widget>
       <widget class="QWidget" name="accelerometerPage">
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="Accelerometer" name="accelerometerWidget" native="true">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>350</y>
-             <width>62</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <double>300.000000000000000</double>
-           </property>
-          </widget>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
-           <property name="geometry">
-            <rect>
-             <x>130</x>
-             <y>350</y>
-             <width>62</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <double>300.000000000000000</double>
-           </property>
-          </widget>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-           <property name="geometry">
-            <rect>
-             <x>250</x>
-             <y>350</y>
-             <width>62</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <double>300.000000000000000</double>
-           </property>
-          </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="accelerometerWidgetLayout" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="Accelerometer" name="accelerometerWidget" native="true"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="controllersToRects">
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR1">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR2">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR3">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

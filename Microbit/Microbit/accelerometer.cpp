@@ -7,7 +7,8 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
   m_WidthAll = 50.0;
-
+  m_proportion = 0.1;
+  m_numberOfBars = 3;
 }
 
 Accelerometer::~Accelerometer()
@@ -15,77 +16,96 @@ Accelerometer::~Accelerometer()
   
 }
 
-void Accelerometer::createAxisX()
+void Accelerometer::paintEvent(QPaintEvent *e)
 {
-  QLineF axisX(30.0, 310.0, 340.0, 310.0);
   QPainter painter(this);
+  setCoordinates();
+  drawBars(painter);
+  createAxisX(painter);
+  createAxisY(painter);
+}
+
+void Accelerometer::setCoordinates()
+{
+  m_axisOffsetTop = (double)(this->height() * m_proportion);
+  m_axisOffsetRight = (double)(this->width() - this->width() * m_proportion);
+  m_axisOffsetBottom = (double)(this->height() - this->height() * m_proportion);
+  m_axisOffsetLeft = (double)(this->width() * m_proportion);
+}
+
+void Accelerometer::createAxisX(QPainter& painter)
+{
+  QLineF axisX(m_axisOffsetLeft, m_axisOffsetBottom, m_axisOffsetRight, m_axisOffsetBottom);
   painter.setPen(Qt::black);
   painter.drawLine(axisX);
   
-  QVector<QString> labels;
-  labels << "X" << "Y" << "Z";
-
-  painter.setFont(QFont("Arial", 12, 100));
-  painter.drawText(140.0, 345.0, "Direction");
-
-  painter.setFont(QFont("Arial", 12));
-  QPointF point(40.0, 330.0);
-  for (int i = 0; i < labels.size(); ++i)
-  {
-    painter.drawText(point, labels[i]);
-    point += QPointF(80.0, 0.0);
-  }
+  setAxisTitle(painter, "Direction", (Qt::AlignHCenter | Qt::AlignBottom));
+  setAxisXlabel(painter);
 }
 
-void Accelerometer::createAxisY()
+void Accelerometer::createAxisY(QPainter& painter)
 {
-  QLineF axisY(30.0, 310.0, 30.0, 10.0);
-  QPainter painter(this);
+  QLineF axisY(m_axisOffsetLeft, m_axisOffsetTop, m_axisOffsetLeft, m_axisOffsetBottom);
   painter.setPen(Qt::black);
   painter.drawLine(axisY);
 
-  painter.setFont(QFont("Arial", 12, 100));
-  painter.drawText(5, 150, "g");
+  setAxisTitle(painter, "g", (Qt::AlignVCenter | Qt::AlignLeft));
+  setAxisYlabel(painter);
+}
 
-  QVector<QString> ticks;
-  ticks << "300" << "200" << "100";
-  painter.setFont(QFont("Arial", 12));
-  QPointF point(2.0, 15.0);
-  for (int i = 0; i < ticks.size(); ++i)
+void Accelerometer::setAxisTitle(QPainter& painter, QString name, int flag)
+{
+  QRectF rect(0, 0, this->width(), this->height());
+  painter.setFont(QFont("Arial", 10, 100));
+  painter.drawText(rect, flag, name);
+}
+
+void Accelerometer::setAxisXlabel(QPainter& painter)
+{
+  QVector<QString> labels;
+  labels << "X" << "Y" << "Z";
+  painter.setFont(QFont("Arial", 10));
+
+  for (int i = 0; i < labels.size(); ++i)
   {
-    painter.drawText(point, ticks[i]);
-    point += QPointF(0, 100.0);
+    QPointF point(((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * (i + 1) + m_axisOffsetLeft), m_axisOffsetBottom + 15);
+    painter.drawText(point, labels[i]);
   }
 }
 
-void Accelerometer::drawBars()
+void Accelerometer::setAxisYlabel(QPainter& painter)
 {
+  QVector<QString> labels;
+  labels << "300" << "200" << "100";
+  painter.setFont(QFont("Arial", 10));
 
-  /*QRectF r1(100, 200, 11, 16);
-  QRectF r2(30, 30, 30, 30);
-  QRectF r3(30, 30, 30, 30);*/
-
-  QPainter painter(this);
-  painter.setPen(Qt::NoPen);
-  painter.setBrush(Qt::red);
-  painter.save();
-  painter.drawRect(30, 310 - m_HeightX, m_WidthAll, m_HeightX);
-  painter.setBrush(Qt::darkGreen);
-  painter.drawRect(110, 310 - m_HeightY, m_WidthAll, m_HeightY);
-  painter.setBrush(Qt::blue);
-  painter.drawRect(190, 310 - m_HeightZ, m_WidthAll, m_HeightZ);
-  painter.setBrush(Qt::cyan);
-  //painter.drawRect(r1);
-
-  
+  for (int i = 0; i < labels.size(); ++i)
+  {
+    QPointF point(m_axisOffsetLeft - 22, (m_axisOffsetBottom - m_axisOffsetTop) * 0.25 * (i + 1) + m_axisOffsetTop);
+    painter.drawText(point, labels[i]);
+  }
 }
 
-
-void Accelerometer::paintEvent(QPaintEvent *e)
+void Accelerometer::drawBars(QPainter& painter)
 {
-  drawBars();
-  createAxisX();
-  createAxisY();
+  QVector<double> rectXcoordinates;
+  for (int i = 1; i <= m_numberOfBars; ++i)
+  {
+    rectXcoordinates.push_back(((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * i + m_axisOffsetLeft) - m_WidthAll / 2);
+  }
+
+  QRectF rect1(rectXcoordinates[0], m_axisOffsetBottom - m_HeightX, m_WidthAll, m_HeightX);
+  QRectF rect2(rectXcoordinates[1], m_axisOffsetBottom - m_HeightY, m_WidthAll, m_HeightY);
+  QRectF rect3(rectXcoordinates[2], m_axisOffsetBottom - m_HeightZ, m_WidthAll, m_HeightZ);
+
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::red);
+  painter.drawRect(rect1);
+  painter.setBrush(Qt::darkGreen);
+  painter.drawRect(rect2);
+  painter.setBrush(Qt::blue);
+  painter.drawRect(rect3);
+  painter.setBrush(Qt::cyan);
 }
 
 void Accelerometer::setHeightX(double x)

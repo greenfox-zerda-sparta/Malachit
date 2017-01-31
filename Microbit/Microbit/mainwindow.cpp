@@ -39,9 +39,9 @@ void MainWindow::setupConnections()
 
   connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 
-  connect(ui.doubleSpinBox, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
-  connect(ui.doubleSpinBox_2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
-  connect(ui.doubleSpinBox_3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
+  connect(ui.controllerToR1, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
+  connect(ui.controllerToR2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
+  connect(ui.controllerToR3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
 }
 
 void MainWindow::exit() 
