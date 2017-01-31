@@ -1,4 +1,3 @@
-
 #include "test.h"
 #include "matrix.h"
 
@@ -21,3 +20,4 @@ void Test::testIfThereAreTwentyfiveButtons()
 	}
 	QCOMPARE(count, 25);
 }
+

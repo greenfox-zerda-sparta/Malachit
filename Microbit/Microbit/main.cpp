@@ -2,11 +2,11 @@
 #ifdef _TEST
 
 #include <QtTest>
-#include "test.h"
+#include "testLogger.h"
 
 int main(int argc, char** argv) {
 	QApplication app(argc, argv);
-	Test test;
+	TestLogger test;
 	return QTest::qExec(&test, argc, argv);
 }
 
