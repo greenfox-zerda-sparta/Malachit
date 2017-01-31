@@ -12,19 +12,22 @@ public:
 	Compass(QWidget *parent);
 	~Compass();
 
-  void paintAzimutHand();
-  void paintDegreeChart();
-
 private slots:
 	void setHeading(int);
 	void paintEvent(QPaintEvent* e);
 private:
 	int heading;
   int offset;
-  QPoint azimutHand[3];
+  int radius;
+  int azimuthHandWidth;
+  QPoint azimuthHand[3];
 
-  void setOffset();
-  void setAzimutHandSize();
+  void paintAzimuthHand(QPainter& painter);
+  void paintDegreeChart(QPainter& painter);
+
+  void setOffsetAndRadius();
+  void setAzimuthHandSize();
+  void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
 
 protected:
 
