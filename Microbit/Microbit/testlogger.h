@@ -10,5 +10,8 @@ public:
 	TestLogger(QObject * parent = Q_NULLPTR);
 
 private slots:
-  void testInfoMethod();
+  void testDebugLevel();
+  void testInfoLevel();
+  void testWarningLevel();
+  void testCriticalLevel();
 };

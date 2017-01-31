@@ -1,28 +1,25 @@
 #include "logger.h"
-#include <QDebug>
-#include <QLoggingCategory>
 
 QVector<QtMsgType> messageType = { QtDebugMsg, QtInfoMsg, QtWarningMsg, QtCriticalMsg };
+QVector<QString> logLevels = { "DEBUG", "INFO", "WARNING", "CRITICAL" };
 
 Logger::Logger(const char* category) {
   m_environment = QProcessEnvironment::systemEnvironment();
-  //m_logLevel = m_environment.value("LOG", category);
+  m_logLevel = m_environment.value("LOG", category);
   m_logLevel = category;
   m_cout = new QTextStream(stdout);
   m_cerr = new QTextStream(stderr);
-  //QStringList qStringList = m_environment.toStringList();
-  //qStringList.append(category);
   m_logging = new QLoggingCategory(category);
-  setLevel();
+  setCategoryLevels();
   dummyLogging();
 }
 
-Logger::Logger(QTextStream* mockStreamCout, QTextStream* mockStreamCerr, const char* logLevel) {
-  m_logLevel = logLevel;
+Logger::Logger(QTextStream* mockStreamCout, QTextStream* mockStreamCerr, const char* category) {
+  m_logLevel = m_environment.value("LOG", category);
   m_cout = mockStreamCout;
   m_cerr = mockStreamCerr;
-  m_logging = new QLoggingCategory(logLevel);
-  setLevel();
+  m_logging = new QLoggingCategory(category);
+  setCategoryLevels();
 }
 
 Logger::~Logger()
@@ -32,22 +29,26 @@ Logger::~Logger()
   delete m_logging;
 }
 
-void Logger::setLevel()
+void Logger::setCategoryLevels()
 {
-  if (m_logLevel == "DEBUG") {
-    setLoggingLevels(0);
-  }
-  else if (m_logLevel == "INFO")
+  for (unsigned int i = 0; i < logLevels.size(); ++i)
   {
-    setLoggingLevels(1);
+    if (m_logLevel == logLevels[i])
+    {
+      setLoggingLevels(i);
+    }
   }
-  else if (m_logLevel == "WARNING")
+}
+
+void Logger::setLoggingLevels(int startingPoint)
+{
+  for (unsigned int i = 0; i < startingPoint; ++i)
   {
-    setLoggingLevels(2);
+    m_logging->setEnabled(messageType[i], false);
   }
-  else if (m_logLevel == "CRITICAL")
+  for (unsigned int j = startingPoint; j < messageType.size(); ++j)
   {
-    setLoggingLevels(3);
+    m_logging->setEnabled(messageType[j], true);
   }
 }
 
@@ -55,8 +56,7 @@ void Logger::debug(const char* debug)
 {
   if (m_logging->isDebugEnabled())
   {
-    m_logLevel = "DEBUG";
-    *m_cout << m_logLevel << ": " << debug << endl;
+    *m_cout << "DEBUG: " << debug << endl;
   }
 }
 
@@ -64,8 +64,7 @@ void Logger::info(const char* info)
 {
   if (m_logging->isInfoEnabled())
   {
-    m_logLevel = "INFO";
-    *m_cout << m_logLevel << ": " << info << endl;
+    *m_cout << "INFO: " << info << endl;
   }
 }
 
@@ -73,8 +72,7 @@ void Logger::warning(const char* warning)
 {
   if (m_logging->isWarningEnabled())
   {
-    m_logLevel = "WARNING";
-    *m_cerr << m_logLevel << ": " << warning << endl;
+    *m_cerr << "WARNING: " << warning << endl;
   }
 }
 
@@ -82,23 +80,14 @@ void Logger::critical(const char* critical)
 {
   if (m_logging->isCriticalEnabled())
   {
-    m_logLevel = "CRITICAL";
-    *m_cerr << m_logLevel << ": " << critical << endl;
+    *m_cerr << "CRITICAL: " << critical << endl;
   }
 }
 
 void Logger::dummyLogging()
 {
-  debug("eljutottam idaig");
-  info("mindig ehes vagyok");
-  warning("inni kell sokat");
-  critical("most nincs ilyen");
-}
-
-void Logger::setLoggingLevels(int startingPoint)
-{
-  for (unsigned int i = startingPoint; i < messageType.size(); ++i)
-  {
-    m_logging->setEnabled(messageType[i], true);
-  }
+  debug("Debug message");
+  info("Info message");
+  warning("Warning message");
+  critical("Critical message");
 }
