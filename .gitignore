@@ -1,3 +1,4 @@
+
 # Created by https://www.gitignore.io/api/windows,c++,visualstudio,qt
 
 ### Windows ###
@@ -370,12 +371,3 @@ build/
 # End of https://www.gitignore.io/api/windows,c++,visualstudio,qt
 *.vcxproj
 *.qrc
-
-# VC
-.opendb
-.db
-x64
-Debug
-.vs
-.vcxproj
-.user
