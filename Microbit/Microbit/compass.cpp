@@ -1,54 +1,77 @@
 #include "compass.h"
 
 Compass::Compass(QWidget *parent)
-	: QWidget(parent)
+  : QWidget(parent)
 {
-	heading = 0;
+  heading = 0;
+  offset = this->width();
+  setAzimutHandSize();
 }
 
 Compass::~Compass()
 {
 
 }
-void Compass::setHeading(int angle) 
+
+void Compass::setHeading(int angle)
 {
-	heading = angle;
-	update();
+  heading = angle;
+  update();
 }
-void Compass::paintEvent(QPaintEvent* e) 
+
+void Compass::setOffset()
 {
-	int offset = this->width();
+  offset = this->width();
+}
 
-  QPoint azimutHand[3] = {
-		QPoint(6, 7),
-		QPoint(-6, 7),
-		QPoint(0, -offset/3)
-	};
+void Compass::setAzimutHandSize()
+{
+  setOffset();
+  azimutHand[0] = QPoint(6, 7);
+  azimutHand[1] = QPoint(-6, 7);
+  azimutHand[2] = QPoint(0, -offset / 3);
+}
 
-	QPainter painter(this);
-	painter.setRenderHint(QPainter::Antialiasing);
-	painter.translate(offset / 2, offset / 2); 
+void Compass::paintAzimutHand()
+{
+  setAzimutHandSize();
 
-	painter.setPen(Qt::NoPen);
-	painter.setBrush(Qt::red);
-	painter.save();
-	painter.rotate(heading);
-	painter.drawConvexPolygon(azimutHand, 3);
-	painter.restore();
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.translate(offset / 2, offset / 2);
 
-	painter.setPen(Qt::NoPen);
-	painter.setBrush(Qt::blue);
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::red);
+  painter.save();
+  painter.rotate(heading);
+  painter.drawConvexPolygon(azimutHand, 3);
+  painter.restore();
 
-	painter.save();
-	painter.rotate(heading + 180);
-	painter.drawConvexPolygon(azimutHand, 3);
-	painter.restore();
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::blue);
 
-	painter.setPen(Qt::black);
+  painter.save();
+  painter.rotate(heading + 180);
+  painter.drawConvexPolygon(azimutHand, 3);
+  painter.end();
+}
 
-	for (int j = 0; j < 60; ++j) {
-		painter.drawLine(offset / 3, 0, offset / 3 - 5, 0);
-		painter.rotate(6.0);
-	}
+void Compass::paintDegreeChart()
+{
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.translate(offset / 2, offset / 2);
+  painter.setPen(Qt::black);
 
+  for (int j = 0; j < 60; ++j) {
+    painter.drawLine(offset / 3, 0, offset / 3 - 5, 0);
+    painter.rotate(6.0);
+  }
+  painter.end();
+}
+
+void Compass::paintEvent(QPaintEvent* e)
+{
+  paintAzimutHand();
+  paintDegreeChart();
 }
