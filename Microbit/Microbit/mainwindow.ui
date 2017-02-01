@@ -18,7 +18,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="matrixPage">
        <layout class="QGridLayout" name="gridLayout">
@@ -51,9 +51,49 @@
        </layout>
       </widget>
       <widget class="QWidget" name="accelerometerPage">
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="Accelerometer" name="accelerometerWidget" native="true"/>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="accelerometerWidgetLayout" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="Accelerometer" name="accelerometerWidget" native="true"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="controllersToRects">
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR1">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR2">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="controllerToR3">
+               <property name="maximum">
+                <double>300.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -153,6 +193,11 @@
   <action name="actionAccelerometer">
    <property name="text">
     <string>Accelerometer</string>
+   </property>
+  </action>
+  <action name="actionQCustomPlot">
+   <property name="text">
+    <string>QCustomPlot</string>
    </property>
   </action>
  </widget>

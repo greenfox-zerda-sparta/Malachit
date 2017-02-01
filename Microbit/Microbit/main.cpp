@@ -1,12 +1,11 @@
-
 #ifdef _TEST
 
 #include <QtTest>
-#include "test.h"
+#include "testlogger.h"
 
 int main(int argc, char** argv) {
 	QApplication app(argc, argv);
-	Test test;
+	TestLogger test;
 	return QTest::qExec(&test, argc, argv);
 }
 
@@ -28,16 +27,3 @@ int main(int argc, char *argv[])
 }
 
 #endif
-/*
-
-#include "mainwindow.h"
-#include <QtWidgets/QApplication>
-
-int main(int argc, char *argv[])
-{
-	QApplication a(argc, argv);
-	MainWindow w;
-	w.show();
-	return a.exec();
-}
-*/
