@@ -4,20 +4,24 @@ QVector<QtMsgType> messageType = { QtDebugMsg, QtInfoMsg, QtWarningMsg, QtCritic
 QVector<QString> logLevels = { "DEBUG", "INFO", "WARNING", "CRITICAL" };
 
 Logger::Logger(const char* category) {
-  m_environment = QProcessEnvironment::systemEnvironment();
-  m_logLevel = m_environment.value("LOG", category);
-  m_logLevel = category;
-  m_cout = new QTextStream(stdout);
-  m_cerr = new QTextStream(stderr);
-  m_logging = new QLoggingCategory(category);
-  setCategoryLevels();
-  dummyLogging();
+  init(category);
 }
 
 Logger::Logger(QTextStream* mockStreamCout, QTextStream* mockStreamCerr, const char* category) {
   m_logLevel = m_environment.value("LOG", category);
   m_cout = mockStreamCout;
   m_cerr = mockStreamCerr;
+  m_logging = new QLoggingCategory(category);
+  setCategoryLevels();
+}
+
+void Logger::init(const char* category)
+{
+  m_environment = QProcessEnvironment::systemEnvironment();
+  m_logLevel = m_environment.value("LOG", category);
+  m_logLevel = category;
+  m_cout = new QTextStream(stdout);
+  m_cerr = new QTextStream(stderr);
   m_logging = new QLoggingCategory(category);
   setCategoryLevels();
 }
@@ -75,12 +79,4 @@ void Logger::critical(const char* critical)
   {
     *m_cerr << "CRITICAL: " << critical << endl;
   }
-}
-
-void Logger::dummyLogging()
-{
-  debug("Debug message");
-  info("Info message");
-  warning("Warning message");
-  critical("Critical message");
 }

@@ -12,6 +12,7 @@ private:
   QTextStream* m_cout;
   QTextStream* m_cerr;
   QLoggingCategory* m_logging;
+  void init(const char*);
 
 public:
   Logger(const char*);
@@ -22,6 +23,5 @@ public:
   void info(const char*);
   void warning(const char*);
   void critical(const char*);
-  void dummyLogging();
 };
 
