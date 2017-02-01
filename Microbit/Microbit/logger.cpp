@@ -50,6 +50,7 @@ void Logger::setLoggingLevels(int startingPoint)
 }
 
 void Logger::debug(const char* debug)
+
 {
   if (m_logging->isDebugEnabled())
   {
