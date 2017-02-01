@@ -380,3 +380,5 @@ Debug
 .vs
 .vcxproj
 .user
+.suo
+.VC.db
