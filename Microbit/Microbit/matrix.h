@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+//#include <QVector>
 #include <QtGui>
 class Matrix : public QWidget
 {
@@ -13,9 +14,13 @@ public:
 	~Matrix();
 
 	void fillQVector();
+	QPushButton* createButton(int i, int j);
+	QVector<QVector<QPushButton*>> getMatrix();
 
 private:
-	QVector<QVector<QPushButton*>> vector;
+	QVector<QVector<QPushButton*>> matrix;
+	unsigned int matrix_x = 5;
+	unsigned int matrix_y = 5;
 };
 
 #endif // MATRIX_H
