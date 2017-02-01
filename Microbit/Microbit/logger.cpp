@@ -22,13 +22,6 @@ Logger::Logger(QTextStream* mockStreamCout, QTextStream* mockStreamCerr, const c
   setCategoryLevels();
 }
 
-Logger::~Logger()
-{
-  delete m_cout;
-  delete m_cerr;
-  delete m_logging;
-}
-
 void Logger::setCategoryLevels()
 {
   for (unsigned int i = 0; i < logLevels.size(); ++i)

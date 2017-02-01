@@ -4,12 +4,18 @@
 #include "logger.h"
 
 class TestLogger : public QObject {
-	Q_OBJECT
+  Q_OBJECT
 
-public:
-	TestLogger(QObject * parent = Q_NULLPTR);
+private:
+  QString* buffer;
+  QString* buffer2;
+  QTextStream* mockCout;
+  QTextStream* mockCerr;
+  void dummyLogging(Logger& logger);
 
 private slots:
+  void init();
+  void cleanup();
   void testDebugLevel();
   void testInfoLevel();
   void testWarningLevel();

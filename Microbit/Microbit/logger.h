@@ -11,12 +11,11 @@ private:
   QString m_logLevel;
   QTextStream* m_cout;
   QTextStream* m_cerr;
-  QLoggingCategory* m_logging;  
+  QLoggingCategory* m_logging;
 
 public:
   Logger(const char*);
   Logger::Logger(QTextStream*, QTextStream*, const char*);
-  ~Logger();
   void setCategoryLevels();
   void setLoggingLevels(int);
   void debug(const char*);
