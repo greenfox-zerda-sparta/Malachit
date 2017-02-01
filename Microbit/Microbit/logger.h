@@ -24,4 +24,3 @@ public:
   void warning(const char*);
   void critical(const char*);
 };
-

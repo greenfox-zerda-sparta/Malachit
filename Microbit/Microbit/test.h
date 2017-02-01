@@ -1,3 +1,4 @@
+
 #ifndef TEST_H
 #define TEST_H
 
@@ -17,4 +18,4 @@ private slots:
 	void testIfThereAreTwentyfiveButtons();
 };
 
-#endif
+#endif // TEST_H

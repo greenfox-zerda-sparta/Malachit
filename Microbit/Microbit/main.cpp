@@ -1,8 +1,7 @@
-
 #ifdef _TEST
 
 #include <QtTest>
-#include "testLogger.h"
+#include "testlogger.h"
 
 int main(int argc, char** argv) {
 	QApplication app(argc, argv);
