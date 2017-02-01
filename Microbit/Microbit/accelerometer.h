@@ -33,6 +33,7 @@ private:
   double m_HeightX;
   double m_HeightY;
   double m_HeightZ;
+  double m_MaxHeight;
   double m_WidthAll;
   double m_axisOffsetTop;
   double m_axisOffsetRight;
@@ -40,6 +41,10 @@ private:
   double m_axisOffsetLeft;
   double m_proportion;
   int m_numberOfBars;
+  double calculateAxisXLabelPositionX(int index);
+  double calculateAxisYLabelPositionY(int index);
+  double calculateBarPositionOnAxisX(int index);
+  double calculateBarHeight(double inputHeight);
 };
 
 #endif // ACCELEROMETER_H
