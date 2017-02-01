@@ -62,6 +62,7 @@ void Logger::setLevel()
 
 
 void Logger::debug(const char* debug)
+
 {
 	if (_logging->isDebugEnabled())
 	{

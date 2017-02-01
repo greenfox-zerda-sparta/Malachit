@@ -30,23 +30,22 @@
       <widget class="QWidget" name="compassPage">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="Compass" name="compassWidget" native="true">
-          <widget class="QSlider" name="compassSlider">
-           <property name="geometry">
-            <rect>
-             <x>100</x>
-             <y>40</y>
-             <width>160</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <number>360</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
+         <widget class="QWidget" name="compassWidgetLayout" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QSlider" name="compassSlider">
+             <property name="maximum">
+              <number>360</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Compass" name="compassWidget" native="true"/>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
