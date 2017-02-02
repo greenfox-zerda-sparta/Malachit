@@ -6,6 +6,7 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_HeightX = 0.0;
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
+  heights << m_HeightX << m_HeightY << m_HeightZ;
   m_MaxHeight = 300.0;
   m_WidthAll = 50.0;
   m_proportion = 0.1;
@@ -95,23 +96,21 @@ void Accelerometer::drawBars(QPainter& painter)
     rectXcoordinates.push_back(calculateBarPositionOnAxisX(i));
   }
 
-  double responsiveHeightX = calculateBarHeight(m_HeightX);
-  double responsiveHeightY = calculateBarHeight(m_HeightY);
-  double responsiveHeightZ = calculateBarHeight(m_HeightZ);
+  QVector<QColor> barColors;
+  barColors << Qt::darkMagenta << Qt::darkCyan << Qt::darkBlue;
+  for (int i = 0; i < m_numberOfBars; ++i)
+  {
+    createBar(painter, heights[i], rectXcoordinates[i], barColors[i]);
+  }
+}
 
-
-  QRectF rect1(rectXcoordinates[0], m_axisOffsetBottom - responsiveHeightX, m_WidthAll, responsiveHeightX);
-  QRectF rect2(rectXcoordinates[1], m_axisOffsetBottom - responsiveHeightY, m_WidthAll, responsiveHeightY);
-  QRectF rect3(rectXcoordinates[2], m_axisOffsetBottom - responsiveHeightZ, m_WidthAll, responsiveHeightZ);
-
+void Accelerometer::createBar(QPainter& painter, double height, double rectXCoordinate, QColor color)
+{
+  double responsiveHeight = calculateBarHeight(height);
+  QRectF rect(rectXCoordinate, m_axisOffsetBottom - responsiveHeight, m_WidthAll, responsiveHeight);
   painter.setPen(Qt::NoPen);
-  painter.setBrush(Qt::red);
-  painter.drawRect(rect1);
-  painter.setBrush(Qt::darkGreen);
-  painter.drawRect(rect2);
-  painter.setBrush(Qt::blue);
-  painter.drawRect(rect3);
-  painter.setBrush(Qt::cyan);
+  painter.setBrush(color);
+  painter.drawRect(rect);
 }
 
 double Accelerometer::calculateAxisXLabelPositionX(int index)
@@ -136,19 +135,19 @@ double Accelerometer::calculateBarHeight(double inputHeight)
 
 void Accelerometer::setHeightX(double x)
 {
-  m_HeightX = x;
+  heights[0] = x;
   update();
 }
 
 void Accelerometer::setHeightY(double y)
 {
-  m_HeightY = y;
+  heights[1] = y;
   update();
 }
 
 void Accelerometer::setHeightZ(double z)
 {
-  m_HeightZ = z;
+  heights[2] = z;
   update();
 }
 
