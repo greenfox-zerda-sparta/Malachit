@@ -6,6 +6,8 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_HeightX = 0.0;
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
+  heights << m_HeightX << m_HeightY << m_HeightZ;
+  m_MaxHeight = 300.0;
   m_WidthAll = 50.0;
   m_proportion = 0.1;
   m_numberOfBars = 3;
@@ -68,7 +70,7 @@ void Accelerometer::setAxisXlabel(QPainter& painter)
 
   for (int i = 0; i < labels.size(); ++i)
   {
-    QPointF point(((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * (i + 1) + m_axisOffsetLeft), m_axisOffsetBottom + 15);
+    QPointF point(calculateAxisXLabelPositionX(i), m_axisOffsetBottom + 15);
     painter.drawText(point, labels[i]);
   }
 }
@@ -81,7 +83,7 @@ void Accelerometer::setAxisYlabel(QPainter& painter)
 
   for (int i = 0; i < labels.size(); ++i)
   {
-    QPointF point(m_axisOffsetLeft - 22, (m_axisOffsetBottom - m_axisOffsetTop) * 0.25 * (i + 1) + m_axisOffsetTop);
+    QPointF point(m_axisOffsetLeft - 22, calculateAxisYLabelPositionY(i));
     painter.drawText(point, labels[i]);
   }
 }
@@ -91,38 +93,61 @@ void Accelerometer::drawBars(QPainter& painter)
   QVector<double> rectXcoordinates;
   for (int i = 1; i <= m_numberOfBars; ++i)
   {
-    rectXcoordinates.push_back(((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * i + m_axisOffsetLeft) - m_WidthAll / 2);
+    rectXcoordinates.push_back(calculateBarPositionOnAxisX(i));
   }
 
-  QRectF rect1(rectXcoordinates[0], m_axisOffsetBottom - m_HeightX, m_WidthAll, m_HeightX);
-  QRectF rect2(rectXcoordinates[1], m_axisOffsetBottom - m_HeightY, m_WidthAll, m_HeightY);
-  QRectF rect3(rectXcoordinates[2], m_axisOffsetBottom - m_HeightZ, m_WidthAll, m_HeightZ);
+  QVector<QColor> barColors;
+  barColors << Qt::darkMagenta << Qt::darkCyan << Qt::darkBlue;
+  for (int i = 0; i < m_numberOfBars; ++i)
+  {
+    createBar(painter, heights[i], rectXcoordinates[i], barColors[i]);
+  }
+}
 
+void Accelerometer::createBar(QPainter& painter, double height, double rectXCoordinate, QColor color)
+{
+  double responsiveHeight = calculateBarHeight(height);
+  QRectF rect(rectXCoordinate, m_axisOffsetBottom - responsiveHeight, m_WidthAll, responsiveHeight);
   painter.setPen(Qt::NoPen);
-  painter.setBrush(Qt::red);
-  painter.drawRect(rect1);
-  painter.setBrush(Qt::darkGreen);
-  painter.drawRect(rect2);
-  painter.setBrush(Qt::blue);
-  painter.drawRect(rect3);
-  painter.setBrush(Qt::cyan);
+  painter.setBrush(color);
+  painter.drawRect(rect);
+}
+
+double Accelerometer::calculateAxisXLabelPositionX(int index)
+{
+  return ((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * (index + 1) + m_axisOffsetLeft);
+}
+
+double Accelerometer::calculateAxisYLabelPositionY(int index)
+{
+  return m_axisOffsetTop + (m_axisOffsetBottom - m_axisOffsetTop) * 1 / 3 * index;
+}
+
+double Accelerometer::calculateBarPositionOnAxisX(int index)
+{
+  return ((m_axisOffsetRight - m_axisOffsetLeft) * 0.25 * index + m_axisOffsetLeft) - m_WidthAll / 2;
+}
+
+double Accelerometer::calculateBarHeight(double inputHeight)
+{
+  return inputHeight / m_MaxHeight * (m_axisOffsetBottom - m_axisOffsetTop);
 }
 
 void Accelerometer::setHeightX(double x)
 {
-  m_HeightX = x;
+  heights[0] = x;
   update();
 }
 
 void Accelerometer::setHeightY(double y)
 {
-  m_HeightY = y;
+  heights[1] = y;
   update();
 }
 
 void Accelerometer::setHeightZ(double z)
 {
-  m_HeightZ = z;
+  heights[2] = z;
   update();
 }
 
