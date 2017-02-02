@@ -39,13 +39,9 @@ void Logger::setCategoryLevels()
 
 void Logger::setLoggingLevels(int startingPoint)
 {
-  for (unsigned int i = 0; i < startingPoint; ++i)
+  for (unsigned int i = 0; i < messageType.size(); ++i)
   {
-    m_logging->setEnabled(messageType[i], false);
-  }
-  for (unsigned int j = startingPoint; j < messageType.size(); ++j)
-  {
-    m_logging->setEnabled(messageType[j], true);
+    m_logging->setEnabled(messageType[i], i >= startingPoint);
   }
 }
 
