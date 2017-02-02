@@ -5,6 +5,12 @@
 #include <QtGui>
 #include <QDoubleSpinBox>
 
+struct Label
+{
+  QString name;
+  QPointF coordinates;
+};
+
 class Accelerometer : public QWidget
 {
   Q_OBJECT
@@ -16,10 +22,12 @@ public:
     void createAxisX(QPainter& painter);
     void createAxisY(QPainter& painter);
     void setAxisTitle(QPainter& painter, QString name, int flag);
+    void drawLabels(QPainter& painter, QVector<Label> labels);
+    QVector<Label> getLabelPositions(QVector<QString> labelNames);
     void setAxisXlabel(QPainter& painter);
     void setAxisYlabel(QPainter& painter);
     void drawBars(QPainter& painter);
-   
+  
 
 private slots:
   void paintEvent(QPaintEvent* e);

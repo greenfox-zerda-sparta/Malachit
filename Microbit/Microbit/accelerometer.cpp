@@ -84,16 +84,28 @@ void Accelerometer::setAxisTitle(QPainter& painter, QString name, int flag)
   painter.drawText(rect, flag, name);
 }
 
+void Accelerometer::drawLabels(QPainter& painter, QVector<Label> labels)
+{
+    painter.setFont(QFont("Arial", 10));
+    for (int i = 0; i < labels.size(); ++i)
+    {
+      painter.drawText(labels[i].coordinates, labels[i].name);
+    }
+}
+
+QVector<Label> Accelerometer::getLabelPositions(QVector<QString> labelNames)
+{
+
+}
+
 void Accelerometer::setAxisXlabel(QPainter& painter)
 {
   QVector<QString> labels;
   labels << "X" << "Y" << "Z";
-  painter.setFont(QFont("Arial", 10));
 
   for (int i = 0; i < labels.size(); ++i)
   {
     QPointF point(calculateAxisXLabelPositionX(i), m_AxisOffsetBottom + 15);
-    painter.drawText(point, labels[i]);
   }
 }
 
@@ -101,12 +113,10 @@ void Accelerometer::setAxisYlabel(QPainter& painter)
 {
   QVector<QString> labels;
   labels << "300" << "200" << "100";
-  painter.setFont(QFont("Arial", 10));
 
   for (int i = 0; i < labels.size(); ++i)
   {
     QPointF point(m_AxisOffsetLeft - 22, calculateAxisYLabelPositionY(i));
-    painter.drawText(point, labels[i]);
   }
 }
 
