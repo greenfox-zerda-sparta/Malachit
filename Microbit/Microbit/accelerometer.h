@@ -30,18 +30,18 @@ private slots:
 
 
 private:
-  QVector<double> heights;
+  QVector<double> m_Heights;
   double m_HeightX;
   double m_HeightY;
   double m_HeightZ;
   double m_MaxHeight;
   double m_WidthAll;
-  double m_axisOffsetTop;
-  double m_axisOffsetRight;
-  double m_axisOffsetBottom;
-  double m_axisOffsetLeft;
-  double m_proportion;
-  int m_numberOfBars;
+  double m_AxisOffsetTop;
+  double m_AxisOffsetRight;
+  double m_AxisOffsetBottom;
+  double m_AxisOffsetLeft;
+  double m_Proportion;
+  int m_NumberOfBars;
   void createBar(QPainter& painter, double height, double rectXCoordinate, QColor color);
   double calculateAxisXLabelPositionX(int index);
   double calculateAxisYLabelPositionY(int index);
