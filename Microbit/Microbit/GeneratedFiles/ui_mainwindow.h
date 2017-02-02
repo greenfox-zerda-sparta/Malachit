@@ -56,7 +56,7 @@ public:
     QWidget *accelerometerPage;
     QVBoxLayout *verticalLayout_4;
     QWidget *accelerometerWidgetLayout;
-    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_31;
     Accelerometer *accelerometerWidget;
     QHBoxLayout *controllersToRects;
     QDoubleSpinBox *controllerToR1;
@@ -142,14 +142,14 @@ public:
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         accelerometerWidgetLayout = new QWidget(accelerometerPage);
         accelerometerWidgetLayout->setObjectName(QStringLiteral("accelerometerWidgetLayout"));
-        verticalLayout_3 = new QVBoxLayout(accelerometerWidgetLayout);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_31 = new QVBoxLayout(accelerometerWidgetLayout);
+        verticalLayout_31->setSpacing(6);
+        verticalLayout_31->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_31->setObjectName(QStringLiteral("verticalLayout_31"));
         accelerometerWidget = new Accelerometer(accelerometerWidgetLayout);
         accelerometerWidget->setObjectName(QStringLiteral("accelerometerWidget"));
 
-        verticalLayout_3->addWidget(accelerometerWidget);
+        verticalLayout_31->addWidget(accelerometerWidget);
 
         controllersToRects = new QHBoxLayout();
         controllersToRects->setSpacing(6);
@@ -176,7 +176,7 @@ public:
         controllersToRects->addWidget(controllerToR3);
 
 
-        verticalLayout_3->addLayout(controllersToRects);
+        verticalLayout_31->addLayout(controllersToRects);
 
 
         verticalLayout_4->addWidget(accelerometerWidgetLayout);
