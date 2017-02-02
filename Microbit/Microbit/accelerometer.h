@@ -23,9 +23,11 @@ public:
     void createAxisY(QPainter& painter);
     void setAxisTitle(QPainter& painter, QString name, int flag);
     void drawLabels(QPainter& painter, QVector<Label> labels);
-    QVector<Label> getLabelPositions(QVector<QString> labelNames);
-    void setAxisXlabel(QPainter& painter);
-    void setAxisYlabel(QPainter& painter);
+    QVector<Label> getXLabelPositions(QVector<QString> labelNames);
+    QVector<Label> getYLabelPositions(QVector<QString> labelNames);
+    void setLabels(QPainter& painter);
+    /*void setAxisXlabel(QPainter& painter);
+    void setAxisYlabel(QPainter& painter);*/
     void drawBars(QPainter& painter);
   
 
@@ -50,6 +52,8 @@ private:
   double m_AxisOffsetLeft;
   double m_Proportion;
   int m_NumberOfBars;
+  QVector<Label> m_Labels;
+  QVector<QString> m_LabelStrings;
   void createBar(QPainter& painter, double height, double rectXCoordinate, QColor color);
   double calculateAxisXLabelPositionX(int index);
   double calculateAxisYLabelPositionY(int index);
