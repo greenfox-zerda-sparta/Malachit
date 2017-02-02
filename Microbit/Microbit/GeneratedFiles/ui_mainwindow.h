@@ -49,8 +49,10 @@ public:
     Matrix *matrixWidget;
     QWidget *compassPage;
     QVBoxLayout *verticalLayout;
-    Compass *compassWidget;
+    QWidget *compassWidgetLayout;
+    QVBoxLayout *verticalLayout_3;
     QSlider *compassSlider;
+    Compass *compassWidget;
     QWidget *accelerometerPage;
     QVBoxLayout *verticalLayout_4;
     QWidget *accelerometerWidgetLayout;
@@ -110,15 +112,26 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        compassWidget = new Compass(compassPage);
-        compassWidget->setObjectName(QStringLiteral("compassWidget"));
-        compassSlider = new QSlider(compassWidget);
+        compassWidgetLayout = new QWidget(compassPage);
+        compassWidgetLayout->setObjectName(QStringLiteral("compassWidgetLayout"));
+        verticalLayout_3 = new QVBoxLayout(compassWidgetLayout);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        compassSlider = new QSlider(compassWidgetLayout);
         compassSlider->setObjectName(QStringLiteral("compassSlider"));
-        compassSlider->setGeometry(QRect(100, 40, 160, 22));
         compassSlider->setMaximum(360);
         compassSlider->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(compassWidget);
+        verticalLayout_3->addWidget(compassSlider);
+
+        compassWidget = new Compass(compassWidgetLayout);
+        compassWidget->setObjectName(QStringLiteral("compassWidget"));
+
+        verticalLayout_3->addWidget(compassWidget);
+
+
+        verticalLayout->addWidget(compassWidgetLayout);
 
         stackedWidget->addWidget(compassPage);
         accelerometerPage = new QWidget();

@@ -17,6 +17,18 @@ private slots:
 	void paintEvent(QPaintEvent* e);
 private:
 	int heading;
+  int offset;
+  int radius;
+  int azimuthHandWidth;
+  QPoint azimuthHand[3];
+
+  void paintAzimuthHand(QPainter& painter);
+  void paintDegreeChart(QPainter& painter);
+
+  void setOffsetAndRadius();
+  void setAzimuthHandSize();
+  void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
+
 protected:
 
 
