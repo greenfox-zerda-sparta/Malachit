@@ -20,12 +20,10 @@ void Compass::paintEvent(QPaintEvent* e)
 {
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
+  setOffsetAndRadius();
   painter.translate(offset, offset);
-
   paintAzimuthHand(painter);
   paintDegreeChart(painter);
-
-  painter.end();
 }
 
 void Compass::paintAzimuthHand(QPainter& painter)
@@ -71,7 +69,6 @@ void Compass::setOffsetAndRadius()
 
 void Compass::setAzimuthHandSize()
 {
-  setOffsetAndRadius();
   azimuthHandWidth = 12;
   azimuthHand[0] = QPoint(azimuthHandWidth / 2, 0);
   azimuthHand[1] = QPoint(-azimuthHandWidth / 2, 0);
