@@ -1,11 +1,14 @@
 #include "compass.h"
 
 Compass::Compass(QWidget *parent)
-  : QWidget(parent)
+  : QWidget(parent),
+  fullRotation(360)
 {
   heading = 0;
-  setOffsetAndRadius();
+  numOfScales = 60;
+  scaleLength = 5;
   setAzimuthHandSize();
+  setScaleMarkPoints();
 }
 
 Compass::~Compass()
@@ -46,12 +49,11 @@ void Compass::paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int
 void Compass::paintDegreeChart(QPainter& painter)
 {
   painter.setPen(Qt::black);
-
-  for (int j = 0; j < 60; ++j) {
-    painter.drawLine(0, radius, 0, radius - 5);
-    painter.rotate(6.0);
+  setScaleMarkPoints();
+  for (int j = 0; j < numOfScales; ++j) {
+    painter.drawLine(scaleMarkPoints[0], scaleMarkPoints[1]);
+    painter.rotate(fullRotation / numOfScales);
   }
-
   painter.restore();
 }
 
@@ -64,7 +66,7 @@ void Compass::setHeading(int angle)
 void Compass::setOffsetAndRadius()
 {
   offset = this->width() / 2;
-  radius = offset / 3 * 2;
+  radius = offset * 0.66;
 }
 
 void Compass::setAzimuthHandSize()
@@ -74,6 +76,12 @@ void Compass::setAzimuthHandSize()
   azimuthHand[0] = QPoint(azimuthHandWidth / 2, 0);
   azimuthHand[1] = QPoint(-azimuthHandWidth / 2, 0);
   azimuthHand[2] = QPoint(0, -radius);
+}
+
+void Compass::setScaleMarkPoints()
+{
+  scaleMarkPoints[0] = QPoint(0, radius);
+  scaleMarkPoints[1] = QPoint(0, radius - scaleLength);
 }
 
 

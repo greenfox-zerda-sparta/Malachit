@@ -19,7 +19,11 @@ private:
 	int heading;
   int offset;
   int radius;
+  int numOfScales;
+  int scaleLength;
+  const int fullRotation;
   int azimuthHandWidth;
+  QPoint scaleMarkPoints[2];
   QPoint azimuthHand[3];
 
   void paintAzimuthHand(QPainter& painter);
@@ -27,6 +31,7 @@ private:
 
   void setOffsetAndRadius();
   void setAzimuthHandSize();
+  void setScaleMarkPoints();
   void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
 
 protected:
