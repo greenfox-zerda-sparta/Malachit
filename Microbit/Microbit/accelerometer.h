@@ -5,33 +5,23 @@
 #include <QtGui>
 #include <QDoubleSpinBox>
 
-struct Label
-{
-  QString name;
-  QPointF coordinates;
-};
-
 class Accelerometer : public QWidget
 {
   Q_OBJECT
 
 public:
-    Accelerometer(QWidget* parent);
-    ~Accelerometer();
-    void setCoordinates();
-    void createAxisX(QPainter& painter);
-    void createAxisY(QPainter& painter);
-    void setAxisTitle(QPainter& painter, QString name, int flag);
-    void drawLabels(QPainter& painter, QVector<Label> labels);
-    QVector<Label> getXLabelPositions(QVector<QString> labelNames);
-    QVector<Label> getYLabelPositions(QVector<QString> labelNames);
-    void setLabels(QPainter& painter);
-    /*void setAxisXlabel(QPainter& painter);
-    void setAxisYlabel(QPainter& painter);*/
-    void drawBars(QPainter& painter);
-  
+  Accelerometer(QWidget* parent);
+  ~Accelerometer();
+  void setCoordinates();
+  void createAxisX(QPainter& painter);
+  void createAxisY(QPainter& painter);
+  void setAxisTitle(QPainter& painter, QString name, int flag);
+  void setAxisXlabel(QPainter& painter);
+  void setAxisYlabel(QPainter& painter);
+  void drawBars(QPainter& painter);
 
-private slots:
+
+  private slots:
   void paintEvent(QPaintEvent* e);
   void setHeightX(double x);
   void setHeightY(double y);
@@ -52,8 +42,6 @@ private:
   double m_AxisOffsetLeft;
   double m_Proportion;
   int m_NumberOfBars;
-  QVector<Label> m_Labels;
-  QVector<QString> m_LabelStrings;
   void createBar(QPainter& painter, double height, double rectXCoordinate, QColor color);
   double calculateAxisXLabelPositionX(int index);
   double calculateAxisYLabelPositionY(int index);

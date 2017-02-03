@@ -11,7 +11,6 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_WidthAll = 50.0;
   m_Proportion = 0.1;
   m_NumberOfBars = 3;
-  m_LabelStrings << "X" << "Y" << "Z" << "300" << "200" << "100";
 }
 
 Accelerometer::~Accelerometer() {}
@@ -22,7 +21,6 @@ void Accelerometer::paintEvent(QPaintEvent *e)
   setCoordinates();
   createAxisX(painter);
   createAxisY(painter);
-  setLabels(painter);
   drawBars(painter);
 }
 
@@ -39,9 +37,9 @@ void Accelerometer::createAxisX(QPainter& painter)
   QLineF axisX(m_AxisOffsetLeft, m_AxisOffsetBottom, m_AxisOffsetRight, m_AxisOffsetBottom);
   painter.setPen(Qt::black);
   painter.drawLine(axisX);
-  
+
   setAxisTitle(painter, "Direction", (Qt::AlignHCenter | Qt::AlignBottom));
-  /*setAxisXlabel(painter);*/
+  setAxisXlabel(painter);
 }
 
 void Accelerometer::createAxisY(QPainter& painter)
@@ -51,7 +49,7 @@ void Accelerometer::createAxisY(QPainter& painter)
   painter.drawLine(axisY);
 
   setAxisTitle(painter, "g", (Qt::AlignVCenter | Qt::AlignLeft));
-  /*setAxisYlabel(painter);*/
+  setAxisYlabel(painter);
 }
 
 void Accelerometer::drawBars(QPainter& painter)
@@ -86,74 +84,31 @@ void Accelerometer::setAxisTitle(QPainter& painter, QString name, int flag)
   painter.drawText(rect, flag, name);
 }
 
-void Accelerometer::setLabels(QPainter& painter)
+void Accelerometer::setAxisXlabel(QPainter& painter)
 {
-  drawLabels(painter, getXLabelPositions(m_LabelsX));
-  drawLabels(painter, getYLabelPositions(m_LabelsY));
-}
+  QVector<QString> labels;
+  labels << "X" << "Y" << "Z";
+  painter.setFont(QFont("Arial", 10));
 
-void Accelerometer::drawLabels(QPainter& painter, QVector<Label> labels)
-{
-    painter.setFont(QFont("Arial", 10));
-    for (int i = 0; i < labels.size(); ++i)
-    {
-      painter.drawText(labels[i].coordinates, labels[i].name);
-    }
-}
-
-QVector<Label> Accelerometer::getXLabelPositions(QVector<QString> labelsX)
-{
-  QVector<Label> temp;
-
-  for (int i = 0; i < labelsX.size(); ++i)
+  for (int i = 0; i < labels.size(); ++i)
   {
-    temp[i].name = labelsX[i];
-    temp[i].coordinates.setX(calculateAxisXLabelPositionX(i));
-    temp[i].coordinates.setY(m_AxisOffsetBottom + 15);
+    QPointF point(calculateAxisXLabelPositionX(i), m_AxisOffsetBottom + 15);
+    painter.drawText(point, labels[i]);
   }
-
-  return temp;
 }
 
-QVector<Label> Accelerometer::getYLabelPositions(QVector<QString> labelsY)
+void Accelerometer::setAxisYlabel(QPainter& painter)
 {
-  QVector<Label> temp;
+  QVector<QString> labels;
+  labels << "300" << "200" << "100";
+  painter.setFont(QFont("Arial", 10));
 
-  for (int i = 0; i < labelsY.size(); ++i)
+  for (int i = 0; i < labels.size(); ++i)
   {
-    temp[i].name = labelsY[i];
-    temp[i].coordinates.setX(m_AxisOffsetLeft - 22);
-    temp[i].coordinates.setY(calculateAxisYLabelPositionY(i));
+    QPointF point(m_AxisOffsetLeft - 22, calculateAxisYLabelPositionY(i));
+    painter.drawText(point, labels[i]);
   }
-
-  return temp;
 }
-
-//void Accelerometer::setAxisXlabel(QPainter& painter)
-//{
-//  QVector<QString> labels;
-//  labels << "X" << "Y" << "Z";
-//  painter.setFont(QFont("Arial", 10));
-//
-//  for (int i = 0; i < labels.size(); ++i)
-//  {
-//    QPointF point(calculateAxisXLabelPositionX(i), m_axisOffsetBottom + 15);
-//    painter.drawText(point, labels[i]);
-//  }
-//}
-//
-//void Accelerometer::setAxisYlabel(QPainter& painter)
-//{
-//  QVector<QString> labels;
-//  labels << "300" << "200" << "100";
-//  painter.setFont(QFont("Arial", 10));
-//
-//  for (int i = 0; i < labels.size(); ++i)
-//  {
-//    QPointF point(m_axisOffsetLeft - 22, calculateAxisYLabelPositionY(i));
-//    painter.drawText(point, labels[i]);
-//  }
-//}
 
 double Accelerometer::calculateAxisXLabelPositionX(int index)
 {
@@ -162,7 +117,7 @@ double Accelerometer::calculateAxisXLabelPositionX(int index)
 
 double Accelerometer::calculateAxisYLabelPositionY(int index)
 {
-  return (m_AxisOffsetBottom - m_AxisOffsetTop) * 1 / 3 * index + m_AxisOffsetTop;
+  return m_AxisOffsetTop + (m_AxisOffsetBottom - m_AxisOffsetTop) * 1 / 3 * index;
 }
 
 double Accelerometer::calculateBarPositionOnAxisX(int index)
@@ -197,4 +152,3 @@ void Accelerometer::setWidthAll(double w)
 {
   m_WidthAll = w;
 }
-
