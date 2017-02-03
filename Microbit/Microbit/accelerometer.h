@@ -5,7 +5,16 @@
 #include <QtGui>
 #include <QDoubleSpinBox>
 
-struct Label
+const int Y_AXIS_MARGIN = 22;
+const int X_AXIS_MARGIN = 15;
+
+struct LabelX
+{
+  QString name;
+  QPointF coordinates;
+};
+
+struct LabelY
 {
   QString name;
   QPointF coordinates;
@@ -53,7 +62,8 @@ private:
   double m_Proportion;
   int m_NumberOfBars;
   QVector<Label> m_Labels;
-  QVector<QString> m_LabelStrings;
+  QVector<QString> m_LabelXAxis;
+  QVector<QString>m_LabelYAxis;
   void createBar(QPainter& painter, double height, double rectXCoordinate, QColor color);
   double calculateAxisXLabelPositionX(int index);
   double calculateAxisYLabelPositionY(int index);

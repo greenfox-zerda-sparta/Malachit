@@ -11,7 +11,8 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_WidthAll = 50.0;
   m_Proportion = 0.1;
   m_NumberOfBars = 3;
-  m_LabelStrings << "X" << "Y" << "Z" << "300" << "200" << "100";
+  m_LabelXAxis << "X" << "Y" << "Z";
+  m_LabelYAxis << "300" << "200" << "100";
 }
 
 Accelerometer::~Accelerometer() {}
@@ -109,7 +110,7 @@ QVector<Label> Accelerometer::getXLabelPositions(QVector<QString> labelsX)
   {
     temp[i].name = labelsX[i];
     temp[i].coordinates.setX(calculateAxisXLabelPositionX(i));
-    temp[i].coordinates.setY(m_AxisOffsetBottom + 15);
+    temp[i].coordinates.setY(m_AxisOffsetBottom + X_AXIS_MARGIN);
   }
 
   return temp;
@@ -122,7 +123,7 @@ QVector<Label> Accelerometer::getYLabelPositions(QVector<QString> labelsY)
   for (int i = 0; i < labelsY.size(); ++i)
   {
     temp[i].name = labelsY[i];
-    temp[i].coordinates.setX(m_AxisOffsetLeft - 22);
+    temp[i].coordinates.setX(m_AxisOffsetLeft - Y_AXIS_MARGIN);
     temp[i].coordinates.setY(calculateAxisYLabelPositionY(i));
   }
 
