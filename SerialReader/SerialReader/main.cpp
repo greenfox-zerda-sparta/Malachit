@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
   }*/
 
   QSerialPort serialPort;
-  QString serialPortName = "com5";
+  QString serialPortName = "com4";
   serialPort.setPortName(serialPortName);
 
   int serialPortBaudRate = (argumentCount > 2) ? argumentList.at(2).toInt() : QSerialPort::Baud115200;
