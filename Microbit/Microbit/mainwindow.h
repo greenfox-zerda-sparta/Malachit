@@ -3,7 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-
+#include <QThread>
+#include "datareceiver.h"
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +18,7 @@ public:
 
 private:
 	Ui::MainWindowClass ui;
+  DataReceiver* m_Receiver;
 private slots:
 	void exit();
 	void showCompassPage();
