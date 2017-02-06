@@ -1,0 +1,9 @@
+diff a/Microbit/Microbit/mainwindow.cpp b/Microbit/Microbit/mainwindow.cpp	(rejected hunks)
+@@ -36,7 +36,6 @@
+ 	connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
+ 	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
+ 
+-
+   connect(m_Receiver, SIGNAL(dataReceived(int)), ui.compassWidget, SLOT(setHeading(int)));
+   connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+ 

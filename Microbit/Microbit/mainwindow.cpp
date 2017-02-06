@@ -36,14 +36,20 @@ void MainWindow::setupConnections()
 	connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
 	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
+<<<<<<< HEAD
   connect(m_Receiver, SIGNAL(dataReceived(int)), ui.compassWidget, SLOT(setHeading(int)));
   connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+=======
+  //connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+>>>>>>> 74386ddc2dad4826c1d191b6cfb338ff84ed7348
 
   connect(ui.controllerToR1, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
   connect(ui.controllerToR2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
   connect(ui.controllerToR3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
 
+  connect(m_Receiver, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 }
+
 void MainWindow::exit() 
 {
 	QApplication::exit();
