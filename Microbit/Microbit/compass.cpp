@@ -52,7 +52,6 @@ void Compass::paintDegreeChart(QPainter& painter)
     painter.drawLine(scaleMarkPoints[0], scaleMarkPoints[1]);
     painter.rotate(fullRotation / numOfScales);
   }
-  painter.restore();
 }
 
 void Compass::setHeading(int angle)

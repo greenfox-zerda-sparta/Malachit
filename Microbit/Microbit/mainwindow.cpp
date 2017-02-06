@@ -3,8 +3,8 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	setupConnections();
   m_Receiver = new DataReceiver(this);
+  setupConnections();
 }
 
 MainWindow::~MainWindow() 
