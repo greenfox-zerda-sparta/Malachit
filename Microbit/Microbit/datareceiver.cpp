@@ -6,7 +6,7 @@ DataReceiver::DataReceiver(QObject *parent)
   m_Timer = new QTimer(this);
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveCompassData()));
   m_Timer->start(1000);
-  number = 0;
+  m_Number = 0;
 }
 
 DataReceiver::~DataReceiver()
@@ -16,7 +16,8 @@ DataReceiver::~DataReceiver()
 
 void DataReceiver::receiveCompassData()
 {
-  number++;
-  qDebug() << number;
-  emit valueChanged(number);
+  m_Number++;
+  qDebug() << m_Number;
+  emit dataReceived(m_Number);
 }
+

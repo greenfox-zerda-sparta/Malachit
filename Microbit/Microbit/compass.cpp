@@ -1,5 +1,5 @@
 #include "compass.h"
-
+#include <QDebug>
 Compass::Compass(QWidget *parent)
   : QWidget(parent),
   fullRotation(360)
@@ -14,6 +14,10 @@ Compass::Compass(QWidget *parent)
 Compass::~Compass()
 {
 
+}
+void Compass::printIze(int num)
+{
+  qDebug() << num;
 }
 
 void Compass::paintEvent(QPaintEvent* e)
@@ -52,7 +56,6 @@ void Compass::paintDegreeChart(QPainter& painter)
     painter.drawLine(scaleMarkPoints[0], scaleMarkPoints[1]);
     painter.rotate(fullRotation / numOfScales);
   }
-  painter.restore();
 }
 
 void Compass::setHeading(int angle)

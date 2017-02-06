@@ -12,13 +12,14 @@ class DataReceiver : public QObject
 public:
   DataReceiver(QObject *parent);
   ~DataReceiver();
+
 public slots:
   void receiveCompassData();
 private:
   QTimer* m_Timer;
-  int number;
+  int m_Number;
 signals:
-  void valueChanged(int num);
+  void dataReceived(int);
 
 };
 

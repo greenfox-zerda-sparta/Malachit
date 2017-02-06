@@ -3,13 +3,12 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	setupConnections();
   m_Receiver = new DataReceiver(this);
+	setupConnections();
 }
 
 MainWindow::~MainWindow() 
 {
-  delete m_Receiver;
 }
 
 void MainWindow::showCompassPage() 
@@ -22,10 +21,10 @@ void MainWindow::showMatrixPage()
 	ui.stackedWidget->setCurrentWidget(ui.matrixPage);
 }
 
-void MainWindow::showAccelerometerPage() {
+void MainWindow::showAccelerometerPage() 
+{
   ui.stackedWidget->setCurrentWidget(ui.accelerometerPage);
 }
-
 
 void MainWindow::setupConnections()
 {
@@ -37,15 +36,15 @@ void MainWindow::setupConnections()
 	connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
 	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
-  //connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+
+  connect(m_Receiver, SIGNAL(dataReceived(int)), ui.compassWidget, SLOT(setHeading(int)));
+  connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 
   connect(ui.controllerToR1, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
   connect(ui.controllerToR2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
   connect(ui.controllerToR3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
 
-  connect(m_Receiver, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 }
-
 void MainWindow::exit() 
 {
 	QApplication::exit();
