@@ -13,7 +13,6 @@ public:
 	~Compass();
 
 private slots:
-	void setHeading(int);
 	void paintEvent(QPaintEvent* e);
 private:
 	int heading;
@@ -34,8 +33,9 @@ private:
   void setScaleMarkPoints();
   void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
 
-protected:
-
+public slots:
+  void setHeading(int);
+  void printIze(int);
 
 };
 
