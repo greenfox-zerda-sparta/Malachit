@@ -36,7 +36,6 @@ void MainWindow::setupConnections()
 	connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
 	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
-
   connect(m_Receiver, SIGNAL(dataReceived(int)), ui.compassWidget, SLOT(setHeading(int)));
   connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
 
