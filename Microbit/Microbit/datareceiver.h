@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QDebug>
+#include <QtSerialPort/QSerialPort>
 
 class DataReceiver : public QObject
 {
@@ -18,6 +19,10 @@ public slots:
 private:
   QTimer* m_Timer;
   int m_Number;
+  QSerialPort serialPort;
+  QString serialPortName;
+  int serialPortBaudRate;
+  QByteArray m_readData;
 signals:
   void dataReceived(int);
 
