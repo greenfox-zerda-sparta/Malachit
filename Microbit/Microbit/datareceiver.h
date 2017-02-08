@@ -5,6 +5,9 @@
 #include <QTimer>
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
+#include <stdlib.h>
+#include <string>
+#include <iostream>
 
 class DataReceiver : public QObject
 {
@@ -18,11 +21,13 @@ public slots:
   void receiveCompassData();
 private:
   QTimer* m_Timer;
-  int m_Number;
   QSerialPort serialPort;
   QString serialPortName;
   int serialPortBaudRate;
   QByteArray m_readData;
+  QVector<std::string> m_Data;
+
+  QVector<std::string> messageParser(QByteArray message);
 signals:
   void dataReceived(int);
 
