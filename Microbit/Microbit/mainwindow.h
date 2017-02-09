@@ -3,8 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-#include <QThread>
-#include "datareceiver.h"
+#include "accelerometer.h"
+#include "compass.h"
 
 class MainWindow : public QMainWindow
 {

@@ -27,14 +27,14 @@ void DataReceiver::receiveCompassData()
   serialPort.open(QIODevice::ReadOnly);
   m_ReadData = serialPort.readAll();
   
-  if (m_ReadData.size() >= 8)
+  if (!m_ReadData.isEmpty())
   {
     m_Metric = parseMessage(m_ReadData);
   }
 
   if (m_Metric.accelerometerVectors.size() == 3) {
     std::cout << m_Metric.compassHeading <<  " | " << m_Metric.accelerometerVectors[0] << " | " << m_Metric.accelerometerVectors[1] << " | " << m_Metric.accelerometerVectors[2] << "\n";
-    emit dataReceived(m_Metric.compassHeading);
+    emit dataReceived(m_Metric);
   }
 }
 

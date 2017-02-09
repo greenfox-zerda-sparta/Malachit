@@ -15,10 +15,6 @@ Compass::~Compass()
 {
 
 }
-void Compass::printIze(int num)
-{
-  qDebug() << num;
-}
 
 void Compass::paintEvent(QPaintEvent* e)
 {
@@ -58,9 +54,9 @@ void Compass::paintDegreeChart(QPainter& painter)
   }
 }
 
-void Compass::setHeading(int angle)
+void Compass::setHeading(Metrics microbitData)
 {
-  heading = angle;
+  heading = microbitData.compassHeading;
   update();
 }
 

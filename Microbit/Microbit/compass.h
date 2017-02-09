@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtGui>
+#include "datareceiver.h"
 
 class Compass : public QWidget
 {
@@ -34,9 +35,7 @@ private:
   void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
 
 public slots:
-  void setHeading(int);
-  void printIze(int);
-
+  void setHeading(Metrics microbitData);
 };
 
 #endif // COMPASS_H

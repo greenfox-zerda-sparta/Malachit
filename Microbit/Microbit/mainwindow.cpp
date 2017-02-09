@@ -37,14 +37,13 @@ void MainWindow::setupConnections()
 	connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
 
 
-  connect(m_Receiver, SIGNAL(dataReceived(int)), ui.compassWidget, SLOT(setHeading(int)));
-  //connect(ui.compassSlider, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+  connect(m_Receiver, SIGNAL(dataReceived(Metrics)), ui.compassWidget, SLOT(setHeading(Metrics)));
 
-  connect(ui.controllerToR1, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
+  connect(m_Receiver, SIGNAL(dataReceived(Metrics)), ui.accelerometerWidget, SLOT(setBars(Metrics)));
+
+  /*connect(ui.controllerToR1, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightX(double)));
   connect(ui.controllerToR2, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightY(double)));
-  connect(ui.controllerToR3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));
-
-  //connect(m_Receiver, SIGNAL(valueChanged(int)), ui.compassWidget, SLOT(setHeading(int)));
+  connect(ui.controllerToR3, SIGNAL(valueChanged(double)), ui.accelerometerWidget, SLOT(setHeightZ(double)));*/
 }
 
 void MainWindow::exit() 

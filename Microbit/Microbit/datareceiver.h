@@ -37,8 +37,7 @@ private:
   QVector<std::string> processStringData(const QByteArray& message);
   Metrics convertProcessedStringToMetrics(QVector<std::string> data);
 signals:
-  void dataReceived(int);
-
+  void dataReceived(Metrics);
 };
 
 #endif // DATARECEIVER_H

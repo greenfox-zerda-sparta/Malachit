@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtGui>
 #include <QDoubleSpinBox>
+#include "datareceiver.h"
 
 
 class Accelerometer : public QWidget
@@ -22,13 +23,13 @@ public:
   void drawBars(QPainter& painter);
 
 
-  private slots:
+private slots:
   void paintEvent(QPaintEvent* e);
+  void setBars(Metrics microbitData);
   void setHeightX(double x);
   void setHeightY(double y);
   void setHeightZ(double z);
   void setWidthAll(double w);
-
 
 private:
   QVector<double> m_Heights;

@@ -130,6 +130,14 @@ double Accelerometer::calculateBarHeight(double inputHeight)
   return inputHeight / m_MaxHeight * (m_AxisOffsetBottom - m_AxisOffsetTop);
 }
 
+void Accelerometer::setBars(Metrics microbitData)
+{
+  m_Heights[0] = microbitData.accelerometerVectors[0];
+  m_Heights[1] = microbitData.accelerometerVectors[1];
+  m_Heights[2] = microbitData.accelerometerVectors[2];
+  update();
+}
+
 void Accelerometer::setHeightX(double x)
 {
   m_Heights[0] = x;
