@@ -9,6 +9,12 @@
 #include <string>
 #include <iostream>
 
+struct Metrics
+{
+  int compassHeading;
+  QVector<int> accelerometerVectors;
+};
+
 class DataReceiver : public QObject
 {
   Q_OBJECT
@@ -24,10 +30,12 @@ private:
   QSerialPort serialPort;
   QString serialPortName;
   int serialPortBaudRate;
-  QByteArray m_readData;
-  QVector<std::string> m_Data;
-
-  QVector<std::string> messageParser(QByteArray message);
+  QByteArray m_ReadData;
+  Metrics m_Metric;
+  void setupSerialPort();
+  Metrics parseMessage(const QByteArray& message);
+  QVector<std::string> processStringData(const QByteArray& message);
+  Metrics convertProcessedStringToMetrics(QVector<std::string> data);
 signals:
   void dataReceived(int);
 

@@ -19,7 +19,7 @@ int main()
       int x = uBit.accelerometer.getX();
       int y = uBit.accelerometer.getY();
       int z = uBit.accelerometer.getZ();
-      ManagedString message = (ManagedString)heading + ',' + (ManagedString)x + ',' + (ManagedString)y + ',' + (ManagedString)z;
+      ManagedString message = (ManagedString)heading + ',' + (ManagedString)x + ',' + (ManagedString)y + ',' + (ManagedString)z + ',';
       serial.send(message);
       uBit.sleep(500);
     }

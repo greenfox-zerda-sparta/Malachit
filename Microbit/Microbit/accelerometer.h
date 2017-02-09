@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QDoubleSpinBox>
 
+
 class Accelerometer : public QWidget
 {
   Q_OBJECT
