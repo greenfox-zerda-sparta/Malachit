@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -21,7 +20,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
@@ -51,17 +49,12 @@ public:
     QVBoxLayout *verticalLayout;
     QWidget *compassWidgetLayout;
     QVBoxLayout *verticalLayout_3;
-    QSlider *compassSlider;
     Compass *compassWidget;
     QWidget *accelerometerPage;
     QVBoxLayout *verticalLayout_4;
     QWidget *accelerometerWidgetLayout;
     QVBoxLayout *verticalLayout_31;
     Accelerometer *accelerometerWidget;
-    QHBoxLayout *controllersToRects;
-    QDoubleSpinBox *controllerToR1;
-    QDoubleSpinBox *controllerToR2;
-    QDoubleSpinBox *controllerToR3;
     QHBoxLayout *horizontalLayout;
     QPushButton *matrixButton;
     QSpacerItem *horizontalSpacer;
@@ -118,13 +111,6 @@ public:
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        compassSlider = new QSlider(compassWidgetLayout);
-        compassSlider->setObjectName(QStringLiteral("compassSlider"));
-        compassSlider->setMaximum(360);
-        compassSlider->setOrientation(Qt::Horizontal);
-
-        verticalLayout_3->addWidget(compassSlider);
-
         compassWidget = new Compass(compassWidgetLayout);
         compassWidget->setObjectName(QStringLiteral("compassWidget"));
 
@@ -150,33 +136,6 @@ public:
         accelerometerWidget->setObjectName(QStringLiteral("accelerometerWidget"));
 
         verticalLayout_31->addWidget(accelerometerWidget);
-
-        controllersToRects = new QHBoxLayout();
-        controllersToRects->setSpacing(6);
-        controllersToRects->setObjectName(QStringLiteral("controllersToRects"));
-        controllerToR1 = new QDoubleSpinBox(accelerometerWidgetLayout);
-        controllerToR1->setObjectName(QStringLiteral("controllerToR1"));
-        controllerToR1->setMaximum(300);
-        controllerToR1->setSingleStep(1);
-
-        controllersToRects->addWidget(controllerToR1);
-
-        controllerToR2 = new QDoubleSpinBox(accelerometerWidgetLayout);
-        controllerToR2->setObjectName(QStringLiteral("controllerToR2"));
-        controllerToR2->setMaximum(300);
-        controllerToR2->setSingleStep(1);
-
-        controllersToRects->addWidget(controllerToR2);
-
-        controllerToR3 = new QDoubleSpinBox(accelerometerWidgetLayout);
-        controllerToR3->setObjectName(QStringLiteral("controllerToR3"));
-        controllerToR3->setMaximum(300);
-        controllerToR3->setSingleStep(1);
-
-        controllersToRects->addWidget(controllerToR3);
-
-
-        verticalLayout_31->addLayout(controllersToRects);
 
 
         verticalLayout_4->addWidget(accelerometerWidgetLayout);
@@ -235,7 +194,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);

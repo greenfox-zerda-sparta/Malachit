@@ -42,6 +42,7 @@ private:
   double m_AxisOffsetRight;
   double m_AxisOffsetBottom;
   double m_AxisOffsetLeft;
+  double m_AxisYMiddle;
   double m_Proportion;
   int m_NumberOfBars;
   void createBar(QPainter& painter, double height, double rectXCoordinate, QColor color);

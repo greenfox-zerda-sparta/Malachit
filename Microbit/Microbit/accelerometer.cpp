@@ -7,7 +7,7 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
   m_Heights << m_HeightX << m_HeightY << m_HeightZ;
-  m_MaxHeight = 300.0;
+  m_MaxHeight = 1500.0;
   m_WidthAll = 50.0;
   m_Proportion = 0.1;
   m_NumberOfBars = 3;
@@ -30,11 +30,12 @@ void Accelerometer::setCoordinates()
   m_AxisOffsetRight = (double)(this->width() - this->width() * m_Proportion);
   m_AxisOffsetBottom = (double)(this->height() - this->height() * m_Proportion);
   m_AxisOffsetLeft = (double)(this->width() * m_Proportion);
+  m_AxisYMiddle = (m_AxisOffsetBottom + m_AxisOffsetTop) / 2;
 }
 
 void Accelerometer::createAxisX(QPainter& painter)
 {
-  QLineF axisX(m_AxisOffsetLeft, m_AxisOffsetBottom, m_AxisOffsetRight, m_AxisOffsetBottom);
+  QLineF axisX(m_AxisOffsetLeft, m_AxisYMiddle, m_AxisOffsetRight, m_AxisYMiddle);
   painter.setPen(Qt::black);
   painter.drawLine(axisX);
 
@@ -71,7 +72,7 @@ void Accelerometer::drawBars(QPainter& painter)
 void Accelerometer::createBar(QPainter& painter, double height, double rectXCoordinate, QColor color)
 {
   double responsiveHeight = calculateBarHeight(height);
-  QRectF rect(rectXCoordinate, m_AxisOffsetBottom - responsiveHeight, m_WidthAll, responsiveHeight);
+  QRectF rect(rectXCoordinate, m_AxisYMiddle, m_WidthAll, responsiveHeight);
   painter.setPen(Qt::NoPen);
   painter.setBrush(color);
   painter.drawRect(rect);
@@ -100,12 +101,12 @@ void Accelerometer::setAxisXlabel(QPainter& painter)
 void Accelerometer::setAxisYlabel(QPainter& painter)
 {
   QVector<QString> labels;
-  labels << "300" << "200" << "100";
+  labels << " 1500" << " 1000" << "  500" << "    0" << " -500" << "-1000" << "-1500";
   painter.setFont(QFont("Arial", 10));
 
   for (int i = 0; i < labels.size(); ++i)
   {
-    QPointF point(m_AxisOffsetLeft - 22, calculateAxisYLabelPositionY(i));
+    QPointF point(m_AxisOffsetLeft - 33, calculateAxisYLabelPositionY(i));
     painter.drawText(point, labels[i]);
   }
 }
@@ -117,7 +118,7 @@ double Accelerometer::calculateAxisXLabelPositionX(int index)
 
 double Accelerometer::calculateAxisYLabelPositionY(int index)
 {
-  return m_AxisOffsetTop + (m_AxisOffsetBottom - m_AxisOffsetTop) * 1 / 3 * index;
+  return m_AxisOffsetTop + (m_AxisOffsetBottom - m_AxisOffsetTop) * 1 / 6 * index;
 }
 
 double Accelerometer::calculateBarPositionOnAxisX(int index)
@@ -127,7 +128,7 @@ double Accelerometer::calculateBarPositionOnAxisX(int index)
 
 double Accelerometer::calculateBarHeight(double inputHeight)
 {
-  return inputHeight / m_MaxHeight * (m_AxisOffsetBottom - m_AxisOffsetTop);
+  return inputHeight / m_MaxHeight * (m_AxisOffsetTop - m_AxisYMiddle);
 }
 
 void Accelerometer::setBars(Metrics microbitData)
