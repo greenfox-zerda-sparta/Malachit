@@ -25,7 +25,6 @@ private:
   QTimer* m_Timer;
   Logger* m_Logger;
   QSerialPort m_SerialPort;
-  QString m_SerialPortName;
   QByteArray m_ReadData;
   Metrics m_Metric;
   int m_BaudRate;

@@ -17,8 +17,7 @@ DataReceiver::~DataReceiver()
 
 void DataReceiver::setupSerialPort()
 {
-  m_SerialPortName = "COM4";
-  m_SerialPort.setPortName(m_SerialPortName);
+  m_SerialPort.setPortName(Config::serialPort);
   m_BaudRate = QSerialPort::Baud115200;
   m_SerialPort.setBaudRate(m_BaudRate);
 }
