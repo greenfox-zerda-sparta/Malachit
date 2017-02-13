@@ -14,7 +14,6 @@ int main(int argc, char** argv) {
 #ifndef _TEST
 
 #include "mainwindow.h"
-#include "logger.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
@@ -22,7 +21,6 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   MainWindow w;
   w.show();
-  Logger logger("DEBUG");
 
   return a.exec();
 }

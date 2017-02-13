@@ -7,6 +7,7 @@ DataReceiver::DataReceiver(QObject *parent)
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveCompassData()));
   m_Timer->start(500);
   setupSerialPort();
+  m_Logger = new Logger("INFO");
 }
 
 DataReceiver::~DataReceiver()
@@ -16,24 +17,23 @@ DataReceiver::~DataReceiver()
 
 void DataReceiver::setupSerialPort()
 {
-  serialPortName = "COM4";
-  serialPort.setPortName(serialPortName);
-  serialPortBaudRate = QSerialPort::Baud115200;
-  serialPort.setBaudRate(serialPortBaudRate);
+  m_SerialPortName = "COM4";
+  m_SerialPort.setPortName(m_SerialPortName);
+  m_BaudRate = QSerialPort::Baud115200;
+  m_SerialPort.setBaudRate(m_BaudRate);
 }
 
 void DataReceiver::receiveCompassData()
 {
-  serialPort.open(QIODevice::ReadOnly);
-  m_ReadData = serialPort.readAll();
-  
+  m_SerialPort.open(QIODevice::ReadOnly);
+  m_ReadData = m_SerialPort.readAll();
   if (!m_ReadData.isEmpty())
   {
     m_Metric = parseMessage(m_ReadData);
   }
-
-  if (m_Metric.accelerometerVectors.size() == 3) {
-    std::cout << m_Metric.compassHeading <<  " | " << m_Metric.accelerometerVectors[0] << " | " << m_Metric.accelerometerVectors[1] << " | " << m_Metric.accelerometerVectors[2] << "\n";
+  if (m_Metric.accelerometerVectors.size() == Config::preferredAccelerometerVectorSize)
+  {
+    m_Logger->info(m_Metric);
     emit dataReceived(m_Metric);
   }
 }
@@ -42,7 +42,7 @@ Metrics DataReceiver::parseMessage(const QByteArray& message)
 {
   QVector<std::string> data = processStringData(message);
   Metrics buffer;
-  if (data.size() == 4)
+  if (data.size() == Config::preferredDataSize)
   {
     buffer = convertProcessedStringToMetrics(data);
   }

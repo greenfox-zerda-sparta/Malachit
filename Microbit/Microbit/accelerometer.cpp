@@ -13,8 +13,6 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_NumberOfBars = 3;
 }
 
-Accelerometer::~Accelerometer() {}
-
 void Accelerometer::paintEvent(QPaintEvent *e)
 {
   QPainter painter(this);

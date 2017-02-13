@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtGui>
-#include "datareceiver.h"
+#include "metrics.h"
 
 class Compass : public QWidget
 {

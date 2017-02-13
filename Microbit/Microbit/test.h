@@ -1,4 +1,3 @@
-
 #ifndef TEST_H
 #define TEST_H
 
@@ -9,13 +8,13 @@
 
 class Test : public QObject
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	Test(QObject *parent = Q_NULLPTR);
+  Test(QObject *parent = Q_NULLPTR);
 
-private slots:
-	void testIfThereAreTwentyfiveButtons();
+  private slots:
+  void testIfThereAreTwentyfiveButtons();
 };
 
 #endif // TEST_H

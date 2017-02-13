@@ -3,17 +3,12 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <stdlib.h>
 #include <string>
-#include <iostream>
-
-struct Metrics
-{
-  int compassHeading;
-  QVector<int> accelerometerVectors;
-};
+#include "logger.h"
+#include "metrics.h"
+#include "config.h"
 
 class DataReceiver : public QObject
 {
@@ -25,19 +20,23 @@ public:
 
 public slots:
   void receiveCompassData();
+
 private:
   QTimer* m_Timer;
-  QSerialPort serialPort;
-  QString serialPortName;
-  int serialPortBaudRate;
+  Logger* m_Logger;
+  QSerialPort m_SerialPort;
+  QString m_SerialPortName;
   QByteArray m_ReadData;
   Metrics m_Metric;
+  int m_BaudRate;
+
   void setupSerialPort();
   Metrics parseMessage(const QByteArray& message);
   QVector<std::string> processStringData(const QByteArray& message);
   Metrics convertProcessedStringToMetrics(QVector<std::string> data);
+
 signals:
   void dataReceived(Metrics);
 };
 
-#endif // DATARECEIVER_H
+#endif

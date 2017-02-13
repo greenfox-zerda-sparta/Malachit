@@ -8,21 +8,21 @@
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
-	~MainWindow();
+  MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
-	void setupConnections();
+  void setupConnections();
 
 private:
-	Ui::MainWindowClass ui;
+  Ui::MainWindowClass ui;
   DataReceiver* m_Receiver;
-private slots:
-	void exit();
-	void showCompassPage();
-	void showMatrixPage();
+  private slots:
+  void exit();
+  void showCompassPage();
+  void showMatrixPage();
   void showAccelerometerPage();
 };
 
