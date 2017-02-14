@@ -29,4 +29,8 @@ namespace Config
   const int scaleLength = 5;
   const int azimuthHandWidth = 12;
   const double diameterToWidgetProportion = 0.66;
+
+  const int matrixSize = 5;
+  const int buttonSize = 60;
+  const int buttonPosition = 100;
 };

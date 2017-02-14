@@ -44,6 +44,7 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *matrixPage;
     QGridLayout *gridLayout;
+    QVBoxLayout *matrixWidgetLayout;
     Matrix *matrixWidget;
     QWidget *compassPage;
     QVBoxLayout *verticalLayout;
@@ -93,10 +94,16 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        matrixWidgetLayout = new QVBoxLayout();
+        matrixWidgetLayout->setSpacing(6);
+        matrixWidgetLayout->setObjectName(QStringLiteral("matrixWidgetLayout"));
         matrixWidget = new Matrix(matrixPage);
         matrixWidget->setObjectName(QStringLiteral("matrixWidget"));
 
-        gridLayout->addWidget(matrixWidget, 0, 0, 1, 1);
+        matrixWidgetLayout->addWidget(matrixWidget);
+
+
+        gridLayout->addLayout(matrixWidgetLayout, 0, 0, 1, 1);
 
         stackedWidget->addWidget(matrixPage);
         compassPage = new QWidget();
@@ -194,7 +201,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
