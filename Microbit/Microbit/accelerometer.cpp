@@ -130,9 +130,10 @@ double Accelerometer::calculateBarHeight(double inputHeight)
 
 void Accelerometer::setBars(Metrics microbitData)
 {
-  m_Heights[0] = microbitData.accelerometerVectors[0];
-  m_Heights[1] = microbitData.accelerometerVectors[1];
-  m_Heights[2] = microbitData.accelerometerVectors[2];
+  for (int i = 0; i < Config::numberOfBars; ++i)
+  {
+    m_Heights[i] = microbitData.accelerometerVectors[i];
+  }
   update();
 }
 

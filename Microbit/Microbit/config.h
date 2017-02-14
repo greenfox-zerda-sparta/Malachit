@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QObject>
-
+#include <QtSerialPort/QSerialPort>
 #include <QString>
 #include <QFont>
 
@@ -8,7 +8,9 @@ namespace Config
 {
   const int preferredAccelerometerVectorSize = 3;
   const int preferredDataSize = 4;
-  const QString serialPort = "COM4";
+  const QString serialPort = "COM10";
+  const int baudRate = QSerialPort::Baud115200;
+
   const double maxBarValue = 1500.0;
   const double barWidth = 50.0;
   const int numberOfBars = 3;
@@ -27,5 +29,4 @@ namespace Config
   const int scaleLength = 5;
   const int azimuthHandWidth = 12;
   const double diameterToWidgetProportion = 0.66;
- 
 };

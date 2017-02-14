@@ -27,7 +27,6 @@ private:
   QSerialPort m_SerialPort;
   QByteArray m_ReadData;
   Metrics m_Metric;
-  int m_BaudRate;
 
   void setupSerialPort();
   Metrics parseMessage(const QByteArray& message);
