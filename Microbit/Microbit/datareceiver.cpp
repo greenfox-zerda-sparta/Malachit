@@ -23,7 +23,7 @@ void DataReceiver::setupSerialPort()
 
 void DataReceiver::receiveCompassData()
 {
-  m_SerialPort.open(QIODevice::ReadOnly);
+  m_SerialPort.open(QIODevice::ReadWrite);
   m_ReadData = m_SerialPort.readAll();
   if (!m_ReadData.isEmpty())
   {
