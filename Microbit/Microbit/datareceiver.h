@@ -19,7 +19,7 @@ public:
   ~DataReceiver();
 
 public slots:
-  void receiveCompassData();
+  void receiveData();
 
 private:
   QTimer* m_Timer;

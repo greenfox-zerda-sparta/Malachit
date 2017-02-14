@@ -4,7 +4,7 @@ DataReceiver::DataReceiver(QObject *parent)
   : QObject(parent)
 {
   m_Timer = new QTimer(this);
-  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveCompassData()));
+  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveData()));
   m_Timer->start(500);
   setupSerialPort();
   m_Logger = new Logger("INFO");
@@ -19,11 +19,11 @@ void DataReceiver::setupSerialPort()
 {
   m_SerialPort.setPortName(Config::serialPort);
   m_SerialPort.setBaudRate(Config::baudRate);
+  m_SerialPort.open(QIODevice::ReadWrite);
 }
 
-void DataReceiver::receiveCompassData()
+void DataReceiver::receiveData()
 {
-  m_SerialPort.open(QIODevice::ReadWrite);
   m_ReadData = m_SerialPort.readAll();
   if (!m_ReadData.isEmpty())
   {
@@ -34,6 +34,7 @@ void DataReceiver::receiveCompassData()
     m_Logger->info(m_Metric);
     emit dataReceived(m_Metric);
   }
+
 }
 
 Metrics DataReceiver::parseMessage(const QByteArray& message)
