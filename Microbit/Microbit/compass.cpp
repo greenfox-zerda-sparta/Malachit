@@ -1,19 +1,11 @@
 #include "compass.h"
-#include <QDebug>
+
 Compass::Compass(QWidget *parent)
-  : QWidget(parent),
-  fullRotation(360)
+  : QWidget(parent)
 {
-  heading = 0;
-  numOfScales = 60;
-  scaleLength = 5;
+  m_Heading = 0;
   setAzimuthHandSize();
   setScaleMarkPoints();
-}
-
-Compass::~Compass()
-{
-
 }
 
 void Compass::paintEvent(QPaintEvent* e)
@@ -21,7 +13,7 @@ void Compass::paintEvent(QPaintEvent* e)
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
   setOffsetAndRadius();
-  painter.translate(offset, offset);
+  painter.translate(m_Offset, m_Offset);
   paintAzimuthHand(painter);
   paintDegreeChart(painter);
 }
@@ -39,7 +31,7 @@ void Compass::paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int
   painter.setPen(Qt::NoPen);
   painter.setBrush(color);
   painter.save();
-  painter.rotate(heading + degree);
+  painter.rotate(m_Heading + degree);
   painter.drawConvexPolygon(azimuthHand, 3);
   painter.restore();
 }
@@ -48,36 +40,35 @@ void Compass::paintDegreeChart(QPainter& painter)
 {
   painter.setPen(Qt::black);
   setScaleMarkPoints();
-  for (int j = 0; j < numOfScales; ++j) {
+  for (int j = 0; j < Config::numOfScales; ++j) {
     painter.drawLine(scaleMarkPoints[0], scaleMarkPoints[1]);
-    painter.rotate(fullRotation / numOfScales);
+    painter.rotate(Config::fullRotation / Config::numOfScales);
   }
 }
 
 void Compass::setHeading(Metrics microbitData)
 {
-  heading = microbitData.compassHeading;
+  m_Heading = microbitData.compassHeading;
   update();
 }
 
 void Compass::setOffsetAndRadius()
 {
-  offset = this->width() / 2;
-  radius = offset * 0.66;
+  m_Offset = this->width() / 2;
+  m_Radius = m_Offset * Config::diameterToWidgetProportion;
 }
 
 void Compass::setAzimuthHandSize()
 {
-  azimuthHandWidth = 12;
-  azimuthHand[0] = QPoint(azimuthHandWidth / 2, 0);
-  azimuthHand[1] = QPoint(-azimuthHandWidth / 2, 0);
-  azimuthHand[2] = QPoint(0, -radius);
+  azimuthHand[0] = QPoint(Config::azimuthHandWidth / 2, 0);
+  azimuthHand[1] = QPoint(-Config::azimuthHandWidth / 2, 0);
+  azimuthHand[2] = QPoint(0, -m_Radius);
 }
 
 void Compass::setScaleMarkPoints()
 {
-  scaleMarkPoints[0] = QPoint(0, radius);
-  scaleMarkPoints[1] = QPoint(0, radius - scaleLength);
+  scaleMarkPoints[0] = QPoint(0, m_Radius);
+  scaleMarkPoints[1] = QPoint(0, m_Radius - Config::scaleLength);
 }
 
 

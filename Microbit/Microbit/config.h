@@ -17,8 +17,15 @@ namespace Config
   const QFont axisLableFont("Arial", 10);
   const int spaceBetweenAxisXAndLabel = 15;
   const int spaceBetweenAxisYAndLabel = 33;
-  const int topLabel = 1500;
-  const int numberOfLabels = 7;
-  const int number
+  const int topAxisYLabel = 1500;
   const int labelStep = 500;
+  const int numberOfAxisYLabels = 7;
+  const int numberOfAxisXLabels = 3;
+
+  const int fullRotation = 360;
+  const int numOfScales = 60;
+  const int scaleLength = 5;
+  const int azimuthHandWidth = 12;
+  const double diameterToWidgetProportion = 0.66;
+ 
 };

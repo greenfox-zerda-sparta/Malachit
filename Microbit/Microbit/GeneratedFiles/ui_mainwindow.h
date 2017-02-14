@@ -16,7 +16,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -62,7 +61,6 @@ public:
     QPushButton *compassButton;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *accelerometerButton;
-    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menuDevices;
     QToolBar *mainToolBar;
@@ -175,11 +173,6 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-
-        verticalLayout_2->addWidget(label);
-
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -217,7 +210,6 @@ public:
         matrixButton->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
         compassButton->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
         accelerometerButton->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindowClass", "TextLabel", Q_NULLPTR));
         menuDevices->setTitle(QApplication::translate("MainWindowClass", "Devices", Q_NULLPTR));
     } // retranslateUi
 

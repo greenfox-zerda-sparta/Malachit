@@ -95,9 +95,9 @@ void Accelerometer::setAxisXlabel(QPainter& painter)
 void Accelerometer::setAxisYlabel(QPainter& painter)
 {
   QVector<QString> labels;
-  for (int i = 0; i < Config::numberOfLabels; ++i)
+  for (int i = 0; i < Config::numberOfAxisYLabels; ++i)
   {
-    labels << QString::number(Config::topLabel - i * Config::labelStep);
+    labels << QString::number(Config::topAxisYLabel - i * Config::labelStep);
   }
   painter.setFont(Config::axisLableFont);
 
@@ -110,17 +110,17 @@ void Accelerometer::setAxisYlabel(QPainter& painter)
 
 double Accelerometer::calculateAxisXLabelPositionX(int index)
 {
-  return ((m_AxisOffsetRight - m_AxisOffsetLeft) * 0.25 * (index + 1) + m_AxisOffsetLeft);
+  return ((m_AxisOffsetRight - m_AxisOffsetLeft) * (index + 1) / (Config::numberOfAxisXLabels + 1) + m_AxisOffsetLeft);
 }
 
 double Accelerometer::calculateAxisYLabelPositionY(int index)
 {
-  return m_AxisOffsetTop + (m_AxisOffsetBottom - m_AxisOffsetTop) * 1 / 6 * index;
+  return m_AxisOffsetTop + (m_AxisOffsetBottom - m_AxisOffsetTop) * index / (Config::numberOfAxisYLabels - 1);
 }
 
 double Accelerometer::calculateBarPositionOnAxisX(int index)
 {
-  return ((m_AxisOffsetRight - m_AxisOffsetLeft) * 0.25 * index + m_AxisOffsetLeft) - Config::barWidth / 2;
+  return ((m_AxisOffsetRight - m_AxisOffsetLeft) * index / (Config::numberOfAxisXLabels + 1) + m_AxisOffsetLeft) - Config::barWidth / 2;
 }
 
 double Accelerometer::calculateBarHeight(double inputHeight)
