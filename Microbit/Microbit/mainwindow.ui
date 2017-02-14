@@ -18,12 +18,16 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="matrixPage">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="Matrix" name="matrixWidget" native="true"/>
+         <layout class="QVBoxLayout" name="matrixWidgetLayout">
+          <item>
+           <widget class="Matrix" name="matrixWidget" native="true"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -160,12 +164,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Matrix</class>
-   <extends>QWidget</extends>
-   <header>matrix.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>Compass</class>
    <extends>QWidget</extends>
    <header>compass.h</header>
@@ -175,6 +173,12 @@
    <class>Accelerometer</class>
    <extends>QWidget</extends>
    <header>accelerometer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Matrix</class>
+   <extends>QWidget</extends>
+   <header>matrix.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
