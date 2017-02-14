@@ -18,7 +18,6 @@ public:
 
 private:
   Ui::MainWindowClass ui;
-  DataReceiver* m_Receiver;
   private slots:
   void exit();
   void showCompassPage();
