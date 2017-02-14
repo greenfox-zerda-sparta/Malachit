@@ -1,5 +1,5 @@
 #include "datasender.h"
-
+#include <QDebug>
 QSerialPort* DataSender::m_SerialPort = NULL;
 
 DataSender::DataSender(QObject *parent)
@@ -19,5 +19,6 @@ void DataSender::setPort(QSerialPort* port)
 void DataSender::sendData()
 {
   QByteArray data = "a";
+  qDebug() << data;
   m_SerialPort->write(data);
 }

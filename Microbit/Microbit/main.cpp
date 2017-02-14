@@ -15,27 +15,13 @@ int main(int argc, char** argv) {
 
 #include "mainwindow.h"
 #include <QtWidgets/QApplication>
-#include "receiverservice.h"
-#include "senderservice.h"
-#include "datareceiver.h"
-#include "datasender.h"
-#include "config.h"
-#include <QtSerialPort/QSerialPort>
+
+#include "servicemanager.h"
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  
-  QSerialPort sharedPort;
-  sharedPort.setPortName(Config::serialPort);
-  sharedPort.setBaudRate(Config::baudRate);
-  sharedPort.open(QIODevice::ReadWrite);
-
-  ReceiverService::setReceiver(&a);
-  SenderService::setSender(&a);
-  DataReceiver::setPort(&sharedPort);
-  DataSender::setPort(&sharedPort);
-
+  ServiceManager myServiceManager(&a);
   MainWindow w;
   w.show();
 
