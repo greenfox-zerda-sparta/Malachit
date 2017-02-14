@@ -3,32 +3,33 @@
 Matrix::Matrix(QWidget *parent)
   : QWidget(parent)
 {
-  fillQVector();
+  m_MatrixGridLayout = new QGridLayout(this);
+  fillMatrix();
 }
 
-Matrix::~Matrix()
-{
-
-}
 QVector<QVector<QPushButton*>> Matrix::getMatrix()
 {
-  return matrix;
+  return m_Matrix;
 }
-void Matrix::fillQVector()
+
+void Matrix::fillMatrix()
 {
-  matrix.resize(matrix_x);
-  for (unsigned int i = 0; i < matrix_x; ++i) {
-    for (unsigned int j = 0; j < matrix_y; ++j) {
-      QPushButton* button = createButton(i, j);
-      matrix[i].push_back(button);
+  
+  m_Matrix.resize(Config::matrixSize);
+  for (unsigned int i = 0; i < Config::matrixSize; ++i) {
+    for (unsigned int j = 0; j < Config::matrixSize; ++j) {
+      QPushButton* button = createButton();
+      m_Matrix[i].push_back(button);
+      m_MatrixGridLayout->addWidget(button, i, j, Qt::AlignCenter);
     }
   }
 }
-QPushButton* Matrix::createButton(int i, int j)
+
+QPushButton* Matrix::createButton()
 {
   QPushButton* button = new QPushButton(this);
-  button->setObjectName(QStringLiteral("button"));
-  button->setGeometry(QRect(20 + i * 60, 20 + j * 60, 50, 50));
+  button->setGeometry(QRect(this->width(), this->height(), Config::buttonSize, Config::buttonSize));
+  button->setMinimumSize(Config::buttonSize, Config::buttonSize);
   button->setCheckable(true);
   button->setChecked(true);
   button->setStyleSheet("background-color: red");

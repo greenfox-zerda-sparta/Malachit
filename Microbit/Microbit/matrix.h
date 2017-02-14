@@ -3,23 +3,22 @@
 
 #include <QWidget>
 #include <QPushButton>
-//#include <QtGui>
+#include <QGridLayout>
+#include "config.h"
+
 class Matrix : public QWidget
 {
   Q_OBJECT
 
 public:
   Matrix(QWidget *parent);
-  ~Matrix();
-
-  void fillQVector();
-  QPushButton* createButton(int i, int j);
+  void fillMatrix();
+  QPushButton* createButton();
   QVector<QVector<QPushButton*>> getMatrix();
 
 private:
-  QVector<QVector<QPushButton*>> matrix;
-  unsigned int matrix_x = 5;
-  unsigned int matrix_y = 5;
+  QVector<QVector<QPushButton*>> m_Matrix;
+  QGridLayout* m_MatrixGridLayout;
 };
 
-#endif // MATRIX_H
+#endif
