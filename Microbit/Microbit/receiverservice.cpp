@@ -1,6 +1,5 @@
 #include "receiverservice.h"
 
-QObject myQObject;
 DataReceiver* ReceiverService::m_Receiver = NULL;
 
 ReceiverService::ReceiverService(QObject *parent)

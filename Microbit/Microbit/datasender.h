@@ -12,12 +12,11 @@ class DataSender : public QObject
 public:
   DataSender(QObject *parent);
   ~DataSender();
-
+  static void setPort(QSerialPort* port);
 public slots:
   void sendData();
 private:
-  QSerialPort m_SerialPort;
-  void setupSerialPort();
+  static QSerialPort* m_SerialPort;
 };
 
 #endif // DATASENDER_H

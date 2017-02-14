@@ -1,13 +1,18 @@
 #include "datareceiver.h"
 
+QSerialPort* DataReceiver::m_SerialPort = NULL;
+
 DataReceiver::DataReceiver(QObject *parent)
   : QObject(parent)
 {
   m_Timer = new QTimer(this);
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveData()));
   m_Timer->start(500);
-  setupSerialPort();
   m_Logger = new Logger("INFO");
+}
+void DataReceiver::setPort(QSerialPort* port)
+{
+  m_SerialPort = port;
 }
 
 DataReceiver::~DataReceiver()
@@ -15,16 +20,9 @@ DataReceiver::~DataReceiver()
   delete m_Timer;
 }
 
-void DataReceiver::setupSerialPort()
-{
-  m_SerialPort.setPortName(Config::serialPort);
-  m_SerialPort.setBaudRate(Config::baudRate);
-  m_SerialPort.open(QIODevice::ReadWrite);
-}
-
 void DataReceiver::receiveData()
 {
-  m_ReadData = m_SerialPort.readAll();
+  m_ReadData = m_SerialPort->readAll();
   if (!m_ReadData.isEmpty())
   {
     m_Metric = parseMessage(m_ReadData);

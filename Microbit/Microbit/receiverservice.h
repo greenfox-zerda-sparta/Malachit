@@ -12,7 +12,7 @@ public:
   ReceiverService(QObject *parent);
   ~ReceiverService();
   static void setReceiver(QObject *parent);
-public:
+private:
   static DataReceiver* m_Receiver;
 
 

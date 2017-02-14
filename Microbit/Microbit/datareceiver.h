@@ -21,14 +21,15 @@ public:
 public slots:
   void receiveData();
 
+public: 
+  static void setPort(QSerialPort* port);
 private:
   QTimer* m_Timer;
   Logger* m_Logger;
-  QSerialPort m_SerialPort;
+  static QSerialPort* m_SerialPort;
   QByteArray m_ReadData;
   Metrics m_Metric;
 
-  void setupSerialPort();
   Metrics parseMessage(const QByteArray& message);
   QVector<std::string> processStringData(const QByteArray& message);
   Metrics convertProcessedStringToMetrics(QVector<std::string> data);
