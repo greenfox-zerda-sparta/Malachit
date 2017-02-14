@@ -4,24 +4,19 @@ QVector<QtMsgType> messageType = { QtDebugMsg, QtInfoMsg, QtWarningMsg, QtCritic
 QVector<QString> logLevels = { "DEBUG", "INFO", "WARNING", "CRITICAL" };
 
 Logger::Logger(const char* category) {
-  init(category);
+  m_environment = QProcessEnvironment::systemEnvironment();
+  m_logLevel = m_environment.value("LOG", category);
+  m_logLevel = category;
+  m_cout = new QTextStream(stdout);
+  m_cerr = new QTextStream(stderr);
+  m_logging = new QLoggingCategory(category);
+  setCategoryLevels();
 }
 
 Logger::Logger(QTextStream* mockStreamCout, QTextStream* mockStreamCerr, const char* category) {
   m_logLevel = m_environment.value("LOG", category);
   m_cout = mockStreamCout;
   m_cerr = mockStreamCerr;
-  m_logging = new QLoggingCategory(category);
-  setCategoryLevels();
-}
-
-void Logger::init(const char* category)
-{
-  m_environment = QProcessEnvironment::systemEnvironment();
-  m_logLevel = m_environment.value("LOG", category);
-  m_logLevel = category;
-  m_cout = new QTextStream(stdout);
-  m_cerr = new QTextStream(stderr);
   m_logging = new QLoggingCategory(category);
   setCategoryLevels();
 }
@@ -46,7 +41,6 @@ void Logger::setLoggingLevels(int startingPoint)
 }
 
 void Logger::debug(const char* debug)
-
 {
   if (m_logging->isDebugEnabled())
   {
@@ -59,6 +53,14 @@ void Logger::info(const char* info)
   if (m_logging->isInfoEnabled())
   {
     *m_cout << "INFO: " << info << endl;
+  }
+}
+
+void Logger::info(Metrics info)
+{
+  if (m_logging->isInfoEnabled())
+  {
+    *m_cout << info.compassHeading << " | " << info.accelerometerVectors[0] << " | " << info.accelerometerVectors[1] << " | " << info.accelerometerVectors[2] << endl;
   }
 }
 

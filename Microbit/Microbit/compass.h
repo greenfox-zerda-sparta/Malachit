@@ -3,26 +3,22 @@
 
 #include <QWidget>
 #include <QtGui>
+#include "metrics.h"
+#include "config.h"
 
 class Compass : public QWidget
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	Compass(QWidget *parent);
-	~Compass();
+  Compass(QWidget *parent);
 
-private slots:
-	void setHeading(int);
-	void paintEvent(QPaintEvent* e);
+  private slots:
+  void paintEvent(QPaintEvent* e);
 private:
-	int heading;
-  int offset;
-  int radius;
-  int numOfScales;
-  int scaleLength;
-  const int fullRotation;
-  int azimuthHandWidth;
+  int m_Heading;
+  int m_Offset;
+  int m_Radius;
   QPoint scaleMarkPoints[2];
   QPoint azimuthHand[3];
 
@@ -34,9 +30,8 @@ private:
   void setScaleMarkPoints();
   void paintHalfOfAzimuthHand(QPainter& painter, const QColor& color, int degree);
 
-protected:
-
-
+  public slots:
+  void setHeading(Metrics microbitData);
 };
 
 #endif // COMPASS_H

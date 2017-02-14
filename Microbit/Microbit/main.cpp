@@ -4,9 +4,9 @@
 #include "testlogger.h"
 
 int main(int argc, char** argv) {
-	QApplication app(argc, argv);
-	TestLogger test;
-	return QTest::qExec(&test, argc, argv);
+  QApplication app(argc, argv);
+  TestLogger test;
+  return QTest::qExec(&test, argc, argv);
 }
 
 #endif
@@ -14,16 +14,15 @@ int main(int argc, char** argv) {
 #ifndef _TEST
 
 #include "mainwindow.h"
-#include "logger.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	MainWindow w;
-	w.show();
-	Logger logger("DEBUG");
-	return a.exec();
+  QApplication a(argc, argv);
+  MainWindow w;
+  w.show();
+
+  return a.exec();
 }
 
 #endif

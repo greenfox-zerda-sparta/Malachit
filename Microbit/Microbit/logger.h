@@ -4,6 +4,7 @@
 #include <QLoggingCategory>
 #include <QTextStream>
 #include <QVector>
+#include "metrics.h"
 
 class Logger {
 private:
@@ -12,7 +13,6 @@ private:
   QTextStream* m_cout;
   QTextStream* m_cerr;
   QLoggingCategory* m_logging;
-  void init(const char*);
 
 public:
   Logger(const char*);
@@ -21,6 +21,7 @@ public:
   void setLoggingLevels(int);
   void debug(const char*);
   void info(const char*);
+  void info(Metrics);
   void warning(const char*);
   void critical(const char*);
 };
