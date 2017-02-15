@@ -33,31 +33,28 @@ ManagedString getMessage()
     return getCompassHeading() + getAccelerometerVectors();
 }
 
-
-void onData()
+void readData()
 {
-    if (serial.read() == 'a')
-    {
-      uBit.display.print("A");
-    }
-
-    if (serial.read() == 'b')
-    {
-      uBit.display.print("B");
-    }
+    ManagedString s = serial.read(2, ASYNC);
+    uBit.display.print(s);
 }
+
+void sendData()
+{
+    serial.send(getMessage(), ASYNC);
+}
+    
 
 int main()
 {
     uBit.init();
     
-    while (1)
+    while(1)
     {
-      serial.send(getMessage());
-      uBit.sleep(500);
-      //onData();
+        readData();
+        sendData();
+        uBit.sleep(500);
     }
     
     release_fiber();
 }
-
