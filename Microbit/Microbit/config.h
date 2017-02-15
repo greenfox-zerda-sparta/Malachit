@@ -33,4 +33,6 @@ namespace Config
   const int matrixSize = 5;
   const int buttonSize = 60;
   const int buttonPosition = 100;
+  const double minMargin = 10.0;
+  const double proportionOfMargin = 0.1;
 };
