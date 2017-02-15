@@ -1,4 +1,5 @@
 #include "MicroBit.h"
+#include <vector>
 
 MicroBit uBit;
 MicroBitSerial serial(USBTX, USBRX);
@@ -15,10 +16,16 @@ ManagedString getCompassHeading()
 
 ManagedString getAccelerometerVectors()
 {
-    int x = uBit.accelerometer.getX();
-    int y = uBit.accelerometer.getY();
-    int z = uBit.accelerometer.getZ();
-    return (ManagedString)x + ',' + (ManagedString)y + ',' + (ManagedString)z + ',';
+    ManagedString accelerometerVectorsString = "";
+    vector<ManagedString> accelerometerVectors;
+    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getX());
+    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getY());
+    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getZ());
+    for (int i = 0; i < accelerometerVectors.size(); ++i)
+    {
+        accelerometerVectorsString = accelerometerVectorsString + accelerometerVectors[i] + ',';
+    }
+    return accelerometerVectorsString;
 }
 
 ManagedString getMessage()

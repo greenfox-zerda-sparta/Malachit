@@ -14,7 +14,8 @@ public:
   DataSender(QObject *parent);
   ~DataSender();
   static void setPort(QSerialPort* port);
-  public slots:
+
+public slots:
   void sendData(int row, int column);
 private:
   static QSerialPort* m_SerialPort;
