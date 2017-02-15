@@ -16,9 +16,10 @@ void DataSender::setPort(QSerialPort* port)
 {
   m_SerialPort = port;
 }
-void DataSender::sendData()
+void DataSender::sendData(int row, int column)
 {
-  QByteArray data = "a";
+  QString message = QString::number(row) + QString::number(column);
+  QByteArray data = message.toUtf8();
   qDebug() << data;
   m_SerialPort->write(data);
 }

@@ -12,11 +12,11 @@ public:
   ~SenderService();
   static void setSender(QObject *parent);
 public slots:
-  void send();
+  void send(int, int);
 private:
   static DataSender* m_Sender;
 signals:
-  void sendToSender();
+  void sendToSender(int, int);
 };
 
 #endif // SENDERSERVICE_H

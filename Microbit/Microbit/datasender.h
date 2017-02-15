@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
+#include <string>
 #include "config.h"
 
 class DataSender : public QObject
@@ -14,7 +15,7 @@ public:
   ~DataSender();
   static void setPort(QSerialPort* port);
 public slots:
-  void sendData();
+  void sendData(int row, int column);
 private:
   static QSerialPort* m_SerialPort;
 };
