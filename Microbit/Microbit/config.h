@@ -8,7 +8,7 @@ namespace Config
 {
   const int preferredAccelerometerVectorSize = 3;
   const int preferredDataSize = 4;
-  const QString serialPort = "COM4";
+  const QString serialPort = "COM10";
   const int baudRate = QSerialPort::Baud115200;
 
   const double maxBarValue = 1500.0;
@@ -31,8 +31,8 @@ namespace Config
   const double diameterToWidgetProportion = 0.66;
 
   const int matrixSize = 5;
-  const int buttonSize = 70;
+  const int buttonSize = 60;
   const int buttonPosition = 100;
   const double minMargin = 10.0;
-  const double proportionOfMargin = 0.4;
+  const double proportionOfMargin = 0.1;
 };

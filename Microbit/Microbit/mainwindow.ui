@@ -23,7 +23,11 @@
       <widget class="QWidget" name="matrixPage">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="Matrix" name="matrixWidget" native="true"/>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="Matrix" name="matrixWidget" native="true"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
