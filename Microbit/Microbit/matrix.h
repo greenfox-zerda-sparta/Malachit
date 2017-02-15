@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include "config.h"
 #include "senderservice.h"
+#include "ledlight.h"
 
 class Matrix : public QWidget
 {
@@ -14,13 +15,15 @@ class Matrix : public QWidget
 public:
   Matrix(QWidget *parent);
   void fillMatrix();
-  QPushButton* createButton();
+  LedLight* createButton(int, int);
   QVector<QVector<QPushButton*>> getMatrix();
 
 private:
   QVector<QVector<QPushButton*>> m_Matrix;
-  QGridLayout* m_MatrixGridLayout;
+  QGridLayout* m_MatrixGridLayout;  
   SenderService* m_SenderService;
+  double m_Margin;
+
 };
 
 #endif
