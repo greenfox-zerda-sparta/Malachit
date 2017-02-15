@@ -3,7 +3,6 @@ MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
 {
   ui.setupUi(this);
-  m_Receiver = new DataReceiver(this);
   setupConnections();
 }
 
@@ -35,11 +34,6 @@ void MainWindow::setupConnections()
   connect(ui.matrixButton, SIGNAL(clicked()), this, SLOT(showMatrixPage()));
   connect(ui.compassButton, SIGNAL(clicked()), this, SLOT(showCompassPage()));
   connect(ui.accelerometerButton, SIGNAL(clicked()), this, SLOT(showAccelerometerPage()));
-
-
-  connect(m_Receiver, SIGNAL(dataReceived(Metrics)), ui.compassWidget, SLOT(setHeading(Metrics)));
-
-  connect(m_Receiver, SIGNAL(dataReceived(Metrics)), ui.accelerometerWidget, SLOT(setBars(Metrics)));
 }
 
 void MainWindow::exit()

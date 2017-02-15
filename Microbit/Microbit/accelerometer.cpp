@@ -7,6 +7,9 @@ Accelerometer::Accelerometer(QWidget *parent)
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
   m_Heights << m_HeightX << m_HeightY << m_HeightZ;
+
+  m_ReceiverService = new ReceiverService(this);
+  connect(m_ReceiverService, SIGNAL(dataReceived(Metrics)), this, SLOT(setBars(Metrics)));
 }
 
 void Accelerometer::paintEvent(QPaintEvent *e)
