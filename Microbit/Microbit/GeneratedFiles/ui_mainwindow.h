@@ -44,7 +44,6 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *matrixPage;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout_5;
     Matrix *matrixWidget;
     QWidget *compassPage;
     QVBoxLayout *verticalLayout;
@@ -94,16 +93,10 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         matrixWidget = new Matrix(matrixPage);
         matrixWidget->setObjectName(QStringLiteral("matrixWidget"));
 
-        verticalLayout_5->addWidget(matrixWidget);
-
-
-        gridLayout->addLayout(verticalLayout_5, 0, 0, 1, 1);
+        gridLayout->addWidget(matrixWidget, 0, 0, 1, 1);
 
         stackedWidget->addWidget(matrixPage);
         compassPage = new QWidget();

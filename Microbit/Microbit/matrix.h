@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QMainWindow>
 #include "config.h"
 #include "ledlight.h"
 
@@ -15,12 +18,17 @@ public:
   Matrix(QWidget *parent);
   void fillMatrix();
   LedLight* createButton(int, int);
-  QVector<QVector<QPushButton*>> getMatrix();
+  QVector<QVector<LedLight*>> getMatrix();
+  //void setParameters();
+  //void resizeEvent(QResizeEvent* event);
 
 private:
-  QVector<QVector<QPushButton*>> m_Matrix;
+  QVector<QVector<LedLight*>> m_Matrix;
   QGridLayout* m_MatrixGridLayout;
   double m_Margin;
+  QVector<QHBoxLayout*> m_HorizontalLayouts;
+  QVBoxLayout* m_VerticalLayout;
+
 };
 
 #endif
