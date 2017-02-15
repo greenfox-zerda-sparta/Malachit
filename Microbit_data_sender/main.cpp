@@ -17,13 +17,13 @@ ManagedString getCompassHeading()
 ManagedString getAccelerometerVectors()
 {
     ManagedString accelerometerVectorsString = "";
-    vector<ManagedString> accelerometerVectors;
-    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getX());
-    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getY());
-    accelerometerVectors.push_back((ManagedString)uBit.accelerometer.getZ());
+    vector<int> accelerometerVectors;
+    accelerometerVectors.push_back(uBit.accelerometer.getX());
+    accelerometerVectors.push_back(uBit.accelerometer.getY());
+    accelerometerVectors.push_back(uBit.accelerometer.getZ());
     for (int i = 0; i < accelerometerVectors.size(); ++i)
     {
-        accelerometerVectorsString = accelerometerVectorsString + accelerometerVectors[i] + ',';
+        accelerometerVectorsString = accelerometerVectorsString + (ManagedString)accelerometerVectors[i] + ',';
     }
     return accelerometerVectorsString;
 }
@@ -33,14 +33,29 @@ ManagedString getMessage()
     return getCompassHeading() + getAccelerometerVectors();
 }
 
+
+void onData()
+{
+    if (serial.read() == 'a')
+    {
+      uBit.display.print("A");
+    }
+
+    if (serial.read() == 'b')
+    {
+      uBit.display.print("B");
+    }
+}
+
 int main()
 {
     uBit.init();
-
+    
     while (1)
     {
       serial.send(getMessage());
       uBit.sleep(500);
+      //onData();
     }
     
     release_fiber();
