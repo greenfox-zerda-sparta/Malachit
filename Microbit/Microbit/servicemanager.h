@@ -22,4 +22,4 @@ private:
   void setUpSerialPort();
 };
 
-#endif // SERVICEMANAGER_H
+#endif
