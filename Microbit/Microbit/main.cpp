@@ -16,9 +16,12 @@ int main(int argc, char** argv) {
 #include "mainwindow.h"
 #include <QtWidgets/QApplication>
 
+#include "servicemanager.h"
+
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
+  ServiceManager myServiceManager(&a);
   MainWindow w;
   w.show();
 

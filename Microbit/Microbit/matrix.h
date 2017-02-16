@@ -4,8 +4,12 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QMainWindow>
 #include "config.h"
 #include "ledlight.h"
+#include "senderservice.h"
 
 class Matrix : public QWidget
 {
@@ -15,12 +19,16 @@ public:
   Matrix(QWidget *parent);
   void fillMatrix();
   LedLight* createButton(int, int);
-  QVector<QVector<QPushButton*>> getMatrix();
+  QVector<QVector<LedLight*>> getMatrix();
 
 private:
-  QVector<QVector<QPushButton*>> m_Matrix;
+  QVector<QVector<LedLight*>> m_Matrix;
   QGridLayout* m_MatrixGridLayout;
   double m_Margin;
+  QVector<QHBoxLayout*> m_HorizontalLayouts;
+  QVBoxLayout* m_VerticalLayout;
+  SenderService* m_SenderService;
+
 };
 
 #endif

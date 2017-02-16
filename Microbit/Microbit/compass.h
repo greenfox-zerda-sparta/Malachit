@@ -5,6 +5,7 @@
 #include <QtGui>
 #include "metrics.h"
 #include "config.h"
+#include "receiverservice.h"
 
 class Compass : public QWidget
 {
@@ -21,6 +22,8 @@ private:
   int m_Radius;
   QPoint scaleMarkPoints[2];
   QPoint azimuthHand[3];
+  ReceiverService* m_ReceiverService;
+
 
   void paintAzimuthHand(QPainter& painter);
   void paintDegreeChart(QPainter& painter);

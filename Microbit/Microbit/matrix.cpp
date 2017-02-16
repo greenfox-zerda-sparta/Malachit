@@ -3,32 +3,40 @@
 Matrix::Matrix(QWidget *parent)
   : QWidget(parent)
 {
-  m_MatrixGridLayout = new QGridLayout(this);
-  m_MatrixGridLayout->setHorizontalSpacing(1);
-  m_MatrixGridLayout->setVerticalSpacing(1);
-  m_MatrixGridLayout->setContentsMargins(0, 0, 0, 0);
   m_Margin = (double)this->width() * Config::proportionOfMargin;
-  m_MatrixGridLayout->setMargin(m_Margin);
-  m_MatrixGridLayout->setSizeConstraint(QGridLayout::SetDefaultConstraint);
+  m_Matrix.resize(Config::matrixSize);
+  m_HorizontalLayouts.resize(Config::matrixSize);
+  m_VerticalLayout = new QVBoxLayout(this);
+  m_VerticalLayout->setMargin(m_Margin);
   fillMatrix();
+  m_SenderService = new SenderService(this);
+  for (int i = 0; i < Config::matrixSize; ++i) {
+    for (int j = 0; j < Config::matrixSize; ++j) {
+      connect(m_Matrix[i][j], SIGNAL(stateChanged(int, int)), m_SenderService, SLOT(send(int, int)));
+    }
+  }
 }
 
-QVector<QVector<QPushButton*>> Matrix::getMatrix()
+QVector<QVector<LedLight*>> Matrix::getMatrix()
 {
   return m_Matrix;
 }
 
 void Matrix::fillMatrix()
 {
-  m_Matrix.resize(Config::matrixSize);
+
   for (unsigned int i = 0; i < Config::matrixSize; ++i)
   {
+
+    m_HorizontalLayouts[i] = new QHBoxLayout;
     for (unsigned int j = 0; j < Config::matrixSize; ++j)
     {
       LedLight* button = createButton(i, j);
       m_Matrix[i].push_back(button);
-      m_MatrixGridLayout->addWidget(button, i, j, Qt::AlignCenter);
+      m_HorizontalLayouts[i]->addWidget(button);
+
     }
+    m_VerticalLayout->addLayout(m_HorizontalLayouts[i]);
   }
 }
 
