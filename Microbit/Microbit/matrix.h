@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include "config.h"
 #include "ledlight.h"
+#include "senderservice.h"
 
 class Matrix : public QWidget
 {
@@ -19,8 +20,6 @@ public:
   void fillMatrix();
   LedLight* createButton(int, int);
   QVector<QVector<LedLight*>> getMatrix();
-  //void setParameters();
-  //void resizeEvent(QResizeEvent* event);
 
 private:
   QVector<QVector<LedLight*>> m_Matrix;
@@ -28,6 +27,7 @@ private:
   double m_Margin;
   QVector<QHBoxLayout*> m_HorizontalLayouts;
   QVBoxLayout* m_VerticalLayout;
+  SenderService* m_SenderService;
 
 };
 
