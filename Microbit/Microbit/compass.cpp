@@ -8,7 +8,7 @@ Compass::Compass(QWidget *parent)
   setScaleMarkPoints();
 
   m_ReceiverService = new ReceiverService(this);
-  connect(m_ReceiverService, SIGNAL(dataReceived(Metrics)), this, SLOT(setHeading(Metrics)));
+  connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(setHeading(Metrics)));
 }
 
 void Compass::paintEvent(QPaintEvent* e)

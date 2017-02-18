@@ -1,26 +1,26 @@
-#include "datareceiver.h"
+#include "receiver.h"
 
-QSerialPort* DataReceiver::m_SerialPort = NULL;
+QSerialPort* Receiver::m_SerialPort = NULL;
 
-DataReceiver::DataReceiver(QObject *parent)
+Receiver::Receiver(QObject *parent)
   : QObject(parent)
 {
   m_Timer = new QTimer(this);
-  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receiveData()));
+  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
   m_Timer->start(500);
   m_Logger = new Logger("INFO");
 }
-void DataReceiver::setPort(QSerialPort* port)
+void Receiver::setPort(QSerialPort* port)
 {
   m_SerialPort = port;
 }
 
-DataReceiver::~DataReceiver()
+Receiver::~Receiver()
 {
   delete m_Timer;
 }
 
-void DataReceiver::receiveData()
+void Receiver::receive()
 {
   m_ReadData = m_SerialPort->readAll();
   if (!m_ReadData.isEmpty())
@@ -30,12 +30,12 @@ void DataReceiver::receiveData()
   if (m_Metric.accelerometerVectors.size() == Config::preferredAccelerometerVectorSize)
   {
     m_Logger->info(m_Metric);
-    emit dataReceived(m_Metric);
+    emit metricsReceived(m_Metric);
   }
 
 }
 
-Metrics DataReceiver::parseMessage(const QByteArray& message)
+Metrics Receiver::parseMessage(const QByteArray& message)
 {
   QVector<std::string> data = processStringData(message);
   Metrics buffer;
@@ -46,7 +46,7 @@ Metrics DataReceiver::parseMessage(const QByteArray& message)
   return buffer;
 }
 
-QVector<std::string> DataReceiver::processStringData(const QByteArray& message)
+QVector<std::string> Receiver::processStringData(const QByteArray& message)
 {
   QVector<std::string> data;
   std::string temp = "";
@@ -65,7 +65,7 @@ QVector<std::string> DataReceiver::processStringData(const QByteArray& message)
   return data;
 }
 
-Metrics DataReceiver::convertProcessedStringToMetrics(QVector<std::string> data)
+Metrics Receiver::convertProcessedStringToMetrics(QVector<std::string> data)
 {
   Metrics buffer;
   buffer.compassHeading = std::stoi(data[0]);

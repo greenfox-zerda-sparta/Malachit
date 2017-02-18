@@ -10,16 +10,16 @@
 #include "metrics.h"
 #include "config.h"
 
-class DataReceiver : public QObject
+class Receiver : public QObject
 {
   Q_OBJECT
 
 public:
-  DataReceiver(QObject *parent);
-  ~DataReceiver();
+  Receiver(QObject *parent);
+  ~Receiver();
 
 public slots:
-  void receiveData();
+  void receive();
 
 public: 
   static void setPort(QSerialPort* port);
@@ -35,7 +35,7 @@ private:
   Metrics convertProcessedStringToMetrics(QVector<std::string> data);
 
 signals:
-  void dataReceived(Metrics);
+  void metricsReceived(Metrics);
 };
 
 #endif

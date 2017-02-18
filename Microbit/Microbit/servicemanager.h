@@ -4,8 +4,8 @@
 #include <QObject>
 #include "receiverservice.h"
 #include "senderservice.h"
-#include "datareceiver.h"
-#include "datasender.h"
+#include "receiver.h"
+#include "sender.h"
 #include "config.h"
 #include <QtSerialPort/QSerialPort>
 

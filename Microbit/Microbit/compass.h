@@ -22,7 +22,7 @@ private:
   int m_Radius;
   QPoint scaleMarkPoints[2];
   QPoint azimuthHand[3];
-  ReceiverService* m_ReceiverService;
+  QPointer<ReceiverService> m_ReceiverService;
 
 
   void paintAzimuthHand(QPainter& painter);

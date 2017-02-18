@@ -2,7 +2,7 @@
 #define SENDERSERVICE_H
 
 #include <QObject>
-#include "datasender.h"
+#include "sender.h"
 class SenderService : public QObject
 {
   Q_OBJECT
@@ -14,7 +14,7 @@ public:
 public slots:
   void send(int, int);
 private:
-  static DataSender* m_Sender;
+  static Sender* m_Sender;
 signals:
   void sendToSender(int, int);
 };

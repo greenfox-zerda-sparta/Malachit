@@ -6,8 +6,8 @@ ServiceManager::ServiceManager(QObject *parent)
   setUpSerialPort();
   ReceiverService::setReceiver(parent);
   SenderService::setSender(parent);
-  DataReceiver::setPort(&m_SharedPort);
-  DataSender::setPort(&m_SharedPort);
+  Receiver::setPort(&m_SharedPort);
+  Sender::setPort(&m_SharedPort);
 }
 
 ServiceManager::~ServiceManager()

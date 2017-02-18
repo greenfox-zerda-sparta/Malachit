@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtGui>
-#include "datareceiver.h"
+#include "receiver.h"
 #include "receiverservice.h"
 
 
@@ -43,7 +43,7 @@ private:
   double calculateAxisYLabelPositionY(int index);
   double calculateBarPositionOnAxisX(int index);
   double calculateBarHeight(double inputHeight);
-  ReceiverService* m_ReceiverService;
+  QPointer<ReceiverService> m_ReceiverService;
 };
 
 #endif

@@ -2,7 +2,7 @@
 #define RECEIVERSERVICE_H
 
 #include <QObject>
-#include "datareceiver.h"
+#include "receiver.h"
 
 class ReceiverService : public QObject
 {
@@ -13,13 +13,11 @@ public:
   ~ReceiverService();
   static void setReceiver(QObject *parent);
 private:
-  static DataReceiver* m_Receiver;
-
-
+  static Receiver* m_Receiver;
 public slots:
   void receive(Metrics);
 signals:
-  void dataReceived(Metrics);
+  void metricsReceived(Metrics);
 };
 
 #endif // RECEIVERSERVICE_H

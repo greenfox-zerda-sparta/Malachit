@@ -1,6 +1,6 @@
 #include "senderservice.h"
 
-DataSender* SenderService::m_Sender = NULL;
+Sender* SenderService::m_Sender = NULL;
 
 SenderService::SenderService(QObject *parent)
   : QObject(parent)
@@ -14,7 +14,7 @@ SenderService::~SenderService()
 }
 void SenderService::setSender(QObject *parent)
 {
-  m_Sender = new DataSender(parent);
+  m_Sender = new Sender(parent);
 }
 void SenderService::send(int row, int column)
 {

@@ -5,18 +5,19 @@
 #include <QtSerialPort/QSerialPort>
 #include <string>
 #include "config.h"
+#include "logger.h"
 
-class DataSender : public QObject
+class Sender : public QObject
 {
   Q_OBJECT
 
 public:
-  DataSender(QObject *parent);
-  ~DataSender();
+  Sender(QObject *parent);
   static void setPort(QSerialPort* port);
 public slots:
   void sendData(int row, int column);
 private:
+  Logger* m_Logger;
   static QSerialPort* m_SerialPort;
 };
 
