@@ -27,6 +27,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "accelerometer.h"
+#include "accelerometerplot.h"
 #include "compass.h"
 #include "matrix.h"
 
@@ -39,6 +40,7 @@ public:
     QAction *actionCompass;
     QAction *actionAccelerometer;
     QAction *actionQCustomPlot;
+    QAction *actionAccelerometerGraph;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QStackedWidget *stackedWidget;
@@ -51,6 +53,11 @@ public:
     QWidget *compassWidgetLayout;
     QVBoxLayout *verticalLayout_3;
     Compass *compassWidget;
+    QWidget *accelerometerPlotPage;
+    QVBoxLayout *verticalLayout_6;
+    QWidget *accelerometerPlotWidgetLayout;
+    QVBoxLayout *verticalLayout_7;
+    AccelerometerPlot *accelerometerPlotWidget;
     QWidget *accelerometerPage;
     QVBoxLayout *verticalLayout_4;
     QWidget *accelerometerWidgetLayout;
@@ -62,6 +69,8 @@ public:
     QPushButton *compassButton;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *accelerometerButton;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *accelerometerPlotButton;
     QMenuBar *menuBar;
     QMenu *menuDevices;
     QToolBar *mainToolBar;
@@ -80,6 +89,8 @@ public:
         actionAccelerometer->setObjectName(QStringLiteral("actionAccelerometer"));
         actionQCustomPlot = new QAction(MainWindowClass);
         actionQCustomPlot->setObjectName(QStringLiteral("actionQCustomPlot"));
+        actionAccelerometerGraph = new QAction(MainWindowClass);
+        actionAccelerometerGraph->setObjectName(QStringLiteral("actionAccelerometerGraph"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
@@ -88,6 +99,7 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
+        stackedWidget->setMinimumSize(QSize(0, 0));
         matrixPage = new QWidget();
         matrixPage->setObjectName(QStringLiteral("matrixPage"));
         gridLayout = new QGridLayout(matrixPage);
@@ -127,6 +139,28 @@ public:
         verticalLayout->addWidget(compassWidgetLayout);
 
         stackedWidget->addWidget(compassPage);
+        accelerometerPlotPage = new QWidget();
+        accelerometerPlotPage->setObjectName(QStringLiteral("accelerometerPlotPage"));
+        verticalLayout_6 = new QVBoxLayout(accelerometerPlotPage);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        accelerometerPlotWidgetLayout = new QWidget(accelerometerPlotPage);
+        accelerometerPlotWidgetLayout->setObjectName(QStringLiteral("accelerometerPlotWidgetLayout"));
+        verticalLayout_7 = new QVBoxLayout(accelerometerPlotWidgetLayout);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        accelerometerPlotWidget = new AccelerometerPlot(accelerometerPlotWidgetLayout);
+        accelerometerPlotWidget->setObjectName(QStringLiteral("accelerometerPlotWidget"));
+        accelerometerPlotWidget->setMinimumSize(QSize(0, 0));
+
+        verticalLayout_7->addWidget(accelerometerPlotWidget);
+
+
+        verticalLayout_6->addWidget(accelerometerPlotWidgetLayout);
+
+        stackedWidget->addWidget(accelerometerPlotPage);
         accelerometerPage = new QWidget();
         accelerometerPage->setObjectName(QStringLiteral("accelerometerPage"));
         verticalLayout_4 = new QVBoxLayout(accelerometerPage);
@@ -177,6 +211,15 @@ public:
 
         horizontalLayout->addWidget(accelerometerButton);
 
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
+
+        accelerometerPlotButton = new QPushButton(centralWidget);
+        accelerometerPlotButton->setObjectName(QStringLiteral("accelerometerPlotButton"));
+
+        horizontalLayout->addWidget(accelerometerPlotButton);
+
 
         verticalLayout_2->addLayout(horizontalLayout);
 
@@ -198,10 +241,11 @@ public:
         menuDevices->addAction(actionMatrix);
         menuDevices->addAction(actionCompass);
         menuDevices->addAction(actionAccelerometer);
+        menuDevices->addAction(actionAccelerometerGraph);
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -214,9 +258,11 @@ public:
         actionCompass->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
         actionAccelerometer->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
         actionQCustomPlot->setText(QApplication::translate("MainWindowClass", "QCustomPlot", Q_NULLPTR));
+        actionAccelerometerGraph->setText(QApplication::translate("MainWindowClass", "AccelerometerGraph", Q_NULLPTR));
         matrixButton->setText(QApplication::translate("MainWindowClass", "Matrix", Q_NULLPTR));
         compassButton->setText(QApplication::translate("MainWindowClass", "Compass", Q_NULLPTR));
         accelerometerButton->setText(QApplication::translate("MainWindowClass", "Accelerometer", Q_NULLPTR));
+        accelerometerPlotButton->setText(QApplication::translate("MainWindowClass", "AccGraph", Q_NULLPTR));
         menuDevices->setTitle(QApplication::translate("MainWindowClass", "Devices", Q_NULLPTR));
     } // retranslateUi
 

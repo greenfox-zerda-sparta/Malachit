@@ -17,8 +17,14 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="matrixPage">
        <layout class="QGridLayout" name="gridLayout">
@@ -38,6 +44,26 @@
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="Compass" name="compassWidget" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="accelerometerPlotPage">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QWidget" name="accelerometerPlotWidgetLayout" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="AccelerometerPlot" name="accelerometerPlotWidget" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -108,6 +134,26 @@
         </property>
        </widget>
       </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="accelerometerPlotButton">
+        <property name="text">
+         <string>AccGraph</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -128,6 +174,7 @@
     <addaction name="actionMatrix"/>
     <addaction name="actionCompass"/>
     <addaction name="actionAccelerometer"/>
+    <addaction name="actionAccelerometerGraph"/>
    </widget>
    <addaction name="menuDevices"/>
   </widget>
@@ -160,6 +207,11 @@
     <string>QCustomPlot</string>
    </property>
   </action>
+  <action name="actionAccelerometerGraph">
+   <property name="text">
+    <string>AccelerometerGraph</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -179,6 +231,12 @@
    <class>Matrix</class>
    <extends>QWidget</extends>
    <header>matrix.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AccelerometerPlot</class>
+   <extends>QWidget</extends>
+   <header>accelerometerplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
