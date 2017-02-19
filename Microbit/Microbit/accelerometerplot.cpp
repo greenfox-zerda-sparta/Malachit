@@ -7,14 +7,12 @@ AccelerometerPlot::AccelerometerPlot(QWidget *parent)
   m_Plot = new QCustomPlot(this);
   m_ReceiverService = new ReceiverService(this);
 
-  //connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(drawGraph()));
-
-  dataTimer = new QTimer();
-
-  m_Plot->addGraph(); // blue line
+  m_Plot->addGraph(); 
   m_Plot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
-  m_Plot->addGraph(); // red line
+  m_Plot->addGraph();
   m_Plot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+  m_Plot->addGraph(); 
+  m_Plot->graph(2)->setPen(QPen(QColor(40, 255, 110)));
 
   QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
   timeTicker->setTimeFormat("%h:%m:%s");
@@ -25,9 +23,8 @@ AccelerometerPlot::AccelerometerPlot(QWidget *parent)
   // make left and bottom axes transfer their ranges to right and top axes:
   connect(m_Plot->xAxis, SIGNAL(rangeChanged(QCPRange)), m_Plot->xAxis2, SLOT(setRange(QCPRange)));
   connect(m_Plot->yAxis, SIGNAL(rangeChanged(QCPRange)), m_Plot->yAxis2, SLOT(setRange(QCPRange)));
-  
-  connect(dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
-  dataTimer->start(0);
+
+  connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(realtimeDataSlot(Metrics)));
 }
 
 void AccelerometerPlot::drawGraph()
@@ -41,7 +38,7 @@ void AccelerometerPlot::paintEvent(QPaintEvent * e)
   m_Plot->setMinimumWidth(this->width());
 }
 
-void AccelerometerPlot::realtimeDataSlot()
+void AccelerometerPlot::realtimeDataSlot(Metrics metrics)
 {
   static QTime time(QTime::currentTime());
   // calculate two new data points:
@@ -49,15 +46,18 @@ void AccelerometerPlot::realtimeDataSlot()
   static double lastPointKey = 0;
   if (key - lastPointKey > 0.002) // at most add point every 2 ms
   {
-    m_Plot->graph(0)->addData(key, qSin(key));
-    m_Plot->graph(1)->addData(key, qCos(key));
+    m_Plot->graph(0)->addData(key, metrics.accelerometerVectors[0] / 100.0);
+    m_Plot->graph(1)->addData(key, metrics.accelerometerVectors[1] / 100.0);
+    m_Plot->graph(2)->addData(key, metrics.accelerometerVectors[2] / 100.0);
+
     // rescale value (vertical) axis to fit the current data:
-    //m_Plot->graph(0)->rescaleValueAxis();
-    //m_Plot->graph(1)->rescaleValueAxis(true);
+    m_Plot->graph(0)->rescaleValueAxis(true);
+    m_Plot->graph(1)->rescaleValueAxis(true);
+    m_Plot->graph(2)->rescaleValueAxis(true);
     lastPointKey = key;
   }
   // make key axis range scroll with the data (at a constant range size of 8):
-  m_Plot->xAxis->setRange(key, 5, Qt::AlignRight);
+  m_Plot->xAxis->setRange(key, 8, Qt::AlignRight);
   m_Plot->replot();
 
 }

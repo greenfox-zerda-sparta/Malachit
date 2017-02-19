@@ -16,11 +16,9 @@ private:
   QPointer<QCustomPlot> m_Plot;
   QPointer<ReceiverService> m_ReceiverService;
 
-  QPointer<QTimer> dataTimer;
-
 public slots:
   void drawGraph();
-  void realtimeDataSlot();
+  void realtimeDataSlot(Metrics);
 };
 
 #endif // ACCELEROMETERPLOT_H
