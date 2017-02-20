@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include "config.h"
+#include "senderservice.h"
 #include "ledlight.h"
 
 class Matrix : public QWidget
@@ -19,8 +20,10 @@ public:
 
 private:
   QVector<QVector<QPushButton*>> m_Matrix;
-  QGridLayout* m_MatrixGridLayout;
+  QGridLayout* m_MatrixGridLayout;  
+  SenderService* m_SenderService;
   double m_Margin;
+
 };
 
 #endif

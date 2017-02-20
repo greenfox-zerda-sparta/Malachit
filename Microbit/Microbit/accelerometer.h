@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include <QtGui>
-#include "datareceiver.h"
+#include "receiver.h"
+#include "receiverservice.h"
 
 
 class Accelerometer : public QWidget
@@ -42,6 +43,7 @@ private:
   double calculateAxisYLabelPositionY(int index);
   double calculateBarPositionOnAxisX(int index);
   double calculateBarHeight(double inputHeight);
+  QPointer<ReceiverService> m_ReceiverService;
 };
 
 #endif
