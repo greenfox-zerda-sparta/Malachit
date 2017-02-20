@@ -40,5 +40,7 @@ MicroBitImage LedMatrix::getMatrixImage()
         }
     }
     MicroBitImage matrixImage(ledStatus);
+    delete ledStatus;
+    ledStatus = NULL;
     return matrixImage;
 }
