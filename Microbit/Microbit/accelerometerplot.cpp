@@ -2,11 +2,11 @@
 #include <QTimer>
 
 AccelerometerPlot::AccelerometerPlot(QWidget *parent)
-  : QWidget(parent)
+  : QWidget(parent),
+  m_Plot(new QCustomPlot(parent)),
+  m_ReceiverService(new ReceiverService(parent)),
+  m_TimeTicker(new QCPAxisTickerTime)
 {
-  m_Plot = new QCustomPlot(this);
-  m_ReceiverService = new ReceiverService(this);
-
   m_Plot->addGraph(); 
   m_Plot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
   m_Plot->addGraph();
@@ -14,9 +14,8 @@ AccelerometerPlot::AccelerometerPlot(QWidget *parent)
   m_Plot->addGraph(); 
   m_Plot->graph(2)->setPen(QPen(QColor(40, 255, 110)));
 
-  QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
-  timeTicker->setTimeFormat("%h:%m:%s");
-  m_Plot->xAxis->setTicker(timeTicker);
+  m_TimeTicker->setTimeFormat("%h:%m:%s");
+  m_Plot->xAxis->setTicker(m_TimeTicker);
   m_Plot->axisRect()->setupFullAxesBox();
   m_Plot->yAxis->setRange(-1.2, 1.2);
 
@@ -24,7 +23,7 @@ AccelerometerPlot::AccelerometerPlot(QWidget *parent)
   connect(m_Plot->xAxis, SIGNAL(rangeChanged(QCPRange)), m_Plot->xAxis2, SLOT(setRange(QCPRange)));
   connect(m_Plot->yAxis, SIGNAL(rangeChanged(QCPRange)), m_Plot->yAxis2, SLOT(setRange(QCPRange)));
 
-  connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(realtimeDataSlot(Metrics)));
+  connect(m_ReceiverService.data(), SIGNAL(metricsReceived(Metrics)), this, SLOT(realtimeDataSlot(Metrics)));
 }
 
 void AccelerometerPlot::drawGraph()

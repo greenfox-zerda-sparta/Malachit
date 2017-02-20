@@ -16,17 +16,16 @@ class Receiver : public QObject
 
 public:
   Receiver(QObject *parent);
-  ~Receiver();
 
 public slots:
   void receive();
 
 public: 
-  static void setPort(QSerialPort* port);
+  static void setPort(QSharedPointer<QSerialPort> port);
 private:
-  QTimer* m_Timer;
-  Logger* m_Logger;
-  static QSerialPort* m_SerialPort;
+  QScopedPointer<QTimer> m_Timer;
+  QScopedPointer<Logger> m_Logger;
+  static QSharedPointer<QSerialPort> m_SerialPort;
   QByteArray m_ReadData;
   Metrics m_Metric;
 

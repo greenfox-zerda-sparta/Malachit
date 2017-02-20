@@ -13,12 +13,12 @@ class Sender : public QObject
 
 public:
   Sender(QObject *parent);
-  static void setPort(QSerialPort* port);
+  static void setPort(QSharedPointer<QSerialPort> port);
 public slots:
   void sendData(int row, int column);
 private:
-  Logger* m_Logger;
-  static QSerialPort* m_SerialPort;
+  QScopedPointer<Logger> m_Logger;
+  static QSharedPointer<QSerialPort> m_SerialPort;
 };
 
 #endif // DATASENDER_H

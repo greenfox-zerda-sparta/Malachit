@@ -21,7 +21,7 @@ public:
 private:
   QVector<QVector<QPushButton*>> m_Matrix;
   QGridLayout* m_MatrixGridLayout;  
-  SenderService* m_SenderService;
+  QScopedPointer<SenderService> m_SenderService;
   double m_Margin;
 
 };

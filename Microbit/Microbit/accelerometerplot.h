@@ -13,8 +13,9 @@ public:
   AccelerometerPlot(QWidget *parent);
   void paintEvent(QPaintEvent* e);
 private:
-  QPointer<QCustomPlot> m_Plot;
-  QPointer<ReceiverService> m_ReceiverService;
+  QScopedPointer<QCustomPlot> m_Plot;
+  QScopedPointer<ReceiverService> m_ReceiverService;
+  QSharedPointer<QCPAxisTickerTime> m_TimeTicker;
 
 public slots:
   void drawGraph();
