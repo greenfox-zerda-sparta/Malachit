@@ -1,5 +1,4 @@
-#include "MicroBit.h"
-#include <vector>
+#include "LedMatrix.h"
 
 MicroBit uBit;
 MicroBitSerial serial(USBTX, USBRX);
@@ -33,25 +32,28 @@ ManagedString getMessage()
     return getCompassHeading() + getAccelerometerVectors();
 }
 
-void readData()
+ManagedString readData()
 {
-    ManagedString s = serial.read(2, ASYNC);
-    uBit.display.print(s);
+    return serial.read(2, ASYNC);
 }
 
 void sendData()
 {
     serial.send(getMessage(), ASYNC);
-}
-    
+}  
 
 int main()
 {
     uBit.init();
-    
+    LedMatrix myLedMatrix;
     while(1)
-    {
-        readData();
+    {   
+        ManagedString buffer = readData();
+        if (buffer.length() != 0)
+        {
+            myLedMatrix.setLedMatrix((int)buffer.charAt(0) - 48, (int)buffer.charAt(1) - 48);
+            uBit.display.print(myLedMatrix.getMatrixImage());
+        }
         sendData();
         uBit.sleep(500);
     }
