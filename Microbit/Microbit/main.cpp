@@ -16,15 +16,19 @@ int main(int argc, char** argv) {
 #include "mainwindow.h"
 #include <QtWidgets/QApplication>
 
+#include <QDebug>
+#include <QVector>
+#include "signin.h"
 #include "servicemanager.h"
+
+#include "receiver.h"
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  ServiceManager myServiceManager(&a);
-  MainWindow w;
+  Receiver::createTimer(&a);
+  MainWindow w(&a);
   w.show();
-
   return a.exec();
 }
 

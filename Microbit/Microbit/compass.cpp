@@ -9,6 +9,7 @@ Compass::Compass(QWidget *parent)
 
   m_ReceiverService = new ReceiverService(this);
   connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(setHeading(Metrics)));
+//  connect(this, SIGNAL(), m_ReceiverService, SLOT(emitSignal()));
 }
 
 void Compass::paintEvent(QPaintEvent* e)

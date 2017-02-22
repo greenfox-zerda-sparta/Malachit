@@ -1,34 +1,31 @@
 ﻿#pragma once
-#include <QWidget>
-#include <QStringList>
-#include <QComboBox>
-#include <QGridLayout>
+#include <QDialog>
 #include <QPushButton>
+#include <QGridLayout>
+#include <QComboBox>
 #include <QLabel>
 #include <QVector>
-
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
-class ComPortSignIn : public QWidget {
+class Signin : public QDialog {
   Q_OBJECT
 
 public:
-  ComPortSignIn(QWidget * parent = Q_NULLPTR);
+  Signin(QDialog * parent = Q_NULLPTR);
+  
+  ~Signin();
   void createLabel();
   void createDropdownList();
   void createConnectButton();
-
-signals:
-  void comportNameSelected(QString);
-  //void connected();
+  bool isProgramLaunchable();
 
 private:
-  QComboBox* dropdownList;
-  QGridLayout* m_gridLayout;
-  QPushButton* connectButton;
-  QStringList comPorts;
   QVector<QString> m_Portnames;
+  QComboBox* dropdownList;
+  QPushButton* connectButton;
+  QGridLayout* m_gridLayout;
+  bool canLaunchProgram = false;
 
 private slots:
   void onConnectButtonClicked();

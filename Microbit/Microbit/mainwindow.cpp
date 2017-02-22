@@ -1,9 +1,12 @@
 #include "mainwindow.h"
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QObject* application, QWidget *parent)
   : QMainWindow(parent)
 {
+  myServiceManager = new ServiceManager(application);
   ui.setupUi(this);
   setupConnections();
+  connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), myServiceManager, SLOT(setUpSerialPort(QString)));
+  connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), this, SLOT(showMatrixPage()));
 }
 
 MainWindow::~MainWindow()

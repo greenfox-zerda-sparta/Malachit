@@ -17,9 +17,17 @@ public:
   ServiceManager(QObject *parent);
   ~ServiceManager();
 
+signals:
+  void portNameSet();
+  void serialPortSet();
+
+public slots:
+  void setUpSerialPort(QString);
+  void shareSerialPort();
+
 private:
   QSerialPort m_SharedPort;
-  void setUpSerialPort();
+  
 };
 
 #endif

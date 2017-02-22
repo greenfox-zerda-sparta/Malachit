@@ -1,13 +1,12 @@
 #include "receiver.h"
 
 QSerialPort* Receiver::m_SerialPort = NULL;
+QTimer* Receiver::m_Timer = NULL;
 
 Receiver::Receiver(QObject *parent)
   : QObject(parent)
 {
-  m_Timer = new QTimer(this);
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
-  m_Timer->start(500);
   m_Logger = new Logger("INFO");
 }
 void Receiver::setPort(QSerialPort* port)
@@ -74,4 +73,18 @@ Metrics Receiver::convertProcessedStringToMetrics(QVector<std::string> data)
     buffer.accelerometerVectors.push_back(std::stoi(data[i]));
   }
   return buffer;
+}
+
+void Receiver::createTimer(QObject *parent) {
+  m_Timer = new QTimer(parent);
+}
+
+void Receiver::startReceiving()
+{
+  m_Timer->start(500);
+}
+
+void Receiver::receiveConnect()
+{
+  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
 }

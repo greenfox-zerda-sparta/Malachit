@@ -3,11 +3,11 @@
 ServiceManager::ServiceManager(QObject *parent)
   : QObject(parent)
 {
-  setUpSerialPort();
+  //setUpSerialPort();
   ReceiverService::setReceiver(parent);
   SenderService::setSender(parent);
-  Receiver::setPort(&m_SharedPort);
-  Sender::setPort(&m_SharedPort);
+  //shareSerialPort();
+  connect(this, SIGNAL(portNameSet()), this, SLOT(shareSerialPort()));
 }
 
 ServiceManager::~ServiceManager()
@@ -15,9 +15,19 @@ ServiceManager::~ServiceManager()
 
 }
 
-void ServiceManager::setUpSerialPort()
+void ServiceManager::setUpSerialPort(QString serialPortName)
 {
-  m_SharedPort.setPortName(Config::serialPort);
+  m_SharedPort.setPortName(serialPortName);
   m_SharedPort.setBaudRate(Config::baudRate);
   m_SharedPort.open(QIODevice::ReadWrite);
+  emit portNameSet();
+}
+
+void ServiceManager::shareSerialPort()
+{
+  Receiver::setPort(&m_SharedPort);
+  Sender::setPort(&m_SharedPort);
+  
+  Receiver::startReceiving();
+  emit serialPortSet();
 }

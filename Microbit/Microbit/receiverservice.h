@@ -16,8 +16,10 @@ private:
   static Receiver* m_Receiver;
 public slots:
   void receive(Metrics);
+  void emitSignal();
 signals:
   void metricsReceived(Metrics);
+  void izeSignal();
 };
 
-#endif // RECEIVERSERVICE_H
+#endif
