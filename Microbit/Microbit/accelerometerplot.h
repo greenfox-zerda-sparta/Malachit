@@ -16,9 +16,11 @@ private:
   QScopedPointer<QCustomPlot> m_Plot;
   QScopedPointer<ReceiverService> m_ReceiverService;
   QSharedPointer<QCPAxisTickerTime> m_TimeTicker;
-
+  void addGraphs();
+  void setGraphProperties();
+  void setupConnections();
+  void addDataPoints(double key, Metrics metrics);
 public slots:
-  void drawGraph();
   void realtimeDataSlot(Metrics);
 };
 

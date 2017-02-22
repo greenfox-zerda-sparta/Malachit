@@ -3,6 +3,10 @@
 #include <QtSerialPort/QSerialPort>
 #include <QString>
 #include <QFont>
+#include <QColor>
+#include <QVector>
+
+
 
 namespace Config
 {
@@ -35,4 +39,7 @@ namespace Config
   const int buttonPosition = 100;
   const double minMargin = 10.0;
   const double proportionOfMargin = 0.1;
+  const QVector<QColor> colors = { QColor(40, 110, 255) , QColor(110, 40, 255) , QColor(255, 110, 40) };
+  const double minTimeElapsed = 0.002;
+  const double rateSize = 10;
 };
