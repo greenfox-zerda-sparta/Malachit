@@ -3,8 +3,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-#include "accelerometer.h"
-#include "compass.h"
 
 class MainWindow : public QMainWindow
 {
@@ -18,6 +16,7 @@ public:
 
 private:
   Ui::MainWindowClass ui;
+
   private slots:
   void exit();
   void showCompassPage();
@@ -25,4 +24,4 @@ private:
   void showAccelerometerPage();
 };
 
-#endif // MAINWINDOW_H
+#endif
