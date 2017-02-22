@@ -1,15 +1,15 @@
 #include "accelerometer.h"
 
 Accelerometer::Accelerometer(QWidget *parent)
-  : QWidget(parent)
+  : QWidget(parent),
+  m_ReceiverService(new ReceiverService(parent))
 {
   m_HeightX = 0.0;
   m_HeightY = 0.0;
   m_HeightZ = 0.0;
   m_Heights << m_HeightX << m_HeightY << m_HeightZ;
 
-  m_ReceiverService = new ReceiverService(this);
-  connect(m_ReceiverService, SIGNAL(metricsReceived(Metrics)), this, SLOT(setBars(Metrics)));
+  connect(m_ReceiverService.data(), SIGNAL(metricsReceived(Metrics)), this, SLOT(setBars(Metrics)));
 }
 
 void Accelerometer::paintEvent(QPaintEvent *e)

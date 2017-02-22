@@ -40,11 +40,14 @@ ManagedString readData()
 void sendData()
 {
     serial.send(getMessage(), ASYNC);
+
 }  
+
 
 int main()
 {
     uBit.init();
+
     LedMatrix myLedMatrix;
     while(1)
     {   

@@ -18,7 +18,7 @@ public:
   ~ServiceManager();
 
 private:
-  QSerialPort m_SharedPort;
+  QSharedPointer<QSerialPort> m_SharedPort;
   void setUpSerialPort();
 };
 

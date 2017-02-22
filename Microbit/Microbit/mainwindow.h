@@ -23,6 +23,7 @@ private:
   void showCompassPage();
   void showMatrixPage();
   void showAccelerometerPage();
+  void showAccelerometerPlotPage();
 };
 
 #endif // MAINWINDOW_H
