@@ -4,6 +4,7 @@ MainWindow::MainWindow(QObject* application, QWidget *parent)
 {
   m_ServiceManager = new ServiceManager(application);
   ui.setupUi(this);
+  ui.stackedWidget->setCurrentWidget(ui.comPortSignInPage);
   setupConnections();
   connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), m_ServiceManager, SLOT(setUpSerialPort(QString)));
   connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), this, SLOT(showMatrixPage()));

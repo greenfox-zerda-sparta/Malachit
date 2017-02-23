@@ -46,7 +46,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QStackedWidget *stackedWidget;
     QWidget *comPortSignInPage;
-    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout_5;
     QVBoxLayout *comPortSingInWidgetLayout;
     ComPortSignIn *comPortSignInWidget;
     QWidget *matrixPage;
@@ -104,20 +104,23 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
+        stackedWidget->setMinimumSize(QSize(0, 0));
         comPortSignInPage = new QWidget();
         comPortSignInPage->setObjectName(QStringLiteral("comPortSignInPage"));
-        verticalLayoutWidget = new QWidget(comPortSignInPage);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(0, 0, 381, 411));
-        comPortSingInWidgetLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout_5 = new QVBoxLayout(comPortSignInPage);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        comPortSingInWidgetLayout = new QVBoxLayout();
         comPortSingInWidgetLayout->setSpacing(6);
-        comPortSingInWidgetLayout->setContentsMargins(11, 11, 11, 11);
         comPortSingInWidgetLayout->setObjectName(QStringLiteral("comPortSingInWidgetLayout"));
-        comPortSingInWidgetLayout->setContentsMargins(0, 0, 0, 0);
-        comPortSignInWidget = new ComPortSignIn(verticalLayoutWidget);
+        comPortSignInWidget = new ComPortSignIn(comPortSignInPage);
         comPortSignInWidget->setObjectName(QStringLiteral("comPortSignInWidget"));
 
         comPortSingInWidgetLayout->addWidget(comPortSignInWidget);
+
+
+        verticalLayout_5->addLayout(comPortSingInWidgetLayout);
 
         stackedWidget->addWidget(comPortSignInPage);
         matrixPage = new QWidget();
@@ -265,7 +268,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
