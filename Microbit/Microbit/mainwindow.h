@@ -23,6 +23,7 @@ private slots:
   void showCompassPage();
   void showMatrixPage();
   void showAccelerometerPage();
+  void showAccelerometerPlotPage();
 };
 
 #endif

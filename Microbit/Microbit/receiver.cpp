@@ -1,23 +1,18 @@
 #include "receiver.h"
 
-QSerialPort* Receiver::m_SerialPort = NULL;
+QSharedPointer<QSerialPort> Receiver::m_SerialPort;
 QTimer* Receiver::m_Timer = NULL;
 
 Receiver::Receiver(QObject *parent)
-  : QObject(parent)
+  : QObject(parent),
+  m_Logger(new Logger("INFO"))
 {
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
-  m_Logger = new Logger("INFO");
 }
 
-void Receiver::setPort(QSerialPort* port)
+void Receiver::setPort(QSharedPointer<QSerialPort> port)
 {
   m_SerialPort = port;
-}
-
-Receiver::~Receiver()
-{
-  delete m_Timer;
 }
 
 void Receiver::receive()
@@ -83,8 +78,3 @@ void Receiver::startReceiving()
 {
   m_Timer->start(500);
 }
-
-/*void Receiver::receiveConnect()
-{
-  connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
-}*/

@@ -1,14 +1,14 @@
 #include "sender.h"
 
-QSerialPort* Sender::m_SerialPort = NULL;
+QSharedPointer<QSerialPort> Sender::m_SerialPort;
 
 Sender::Sender(QObject *parent)
-  : QObject(parent)
+  : QObject(parent),
+  m_Logger(new Logger("INFO"))
 {
-  m_Logger = new Logger("INFO");
 }
 
-void Sender::setPort(QSerialPort* port)
+void Sender::setPort(QSharedPointer<QSerialPort> port)
 {
   m_SerialPort = port;
 }

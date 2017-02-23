@@ -22,8 +22,8 @@ public slots:
   void shareSerialPort();
 
 private:
-  QSerialPort m_SharedPort;
-
+  QSharedPointer<QSerialPort> m_SharedPort;
+  void setUpSerialPort();
 };
 
 #endif
