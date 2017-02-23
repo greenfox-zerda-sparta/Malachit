@@ -11,13 +11,12 @@ class MainWindow : public QMainWindow
 
 public:
   MainWindow(QObject*, QWidget *parent = 0);
-  ~MainWindow();
 
   void setupConnections();
 
 private:
   Ui::MainWindowClass ui;
-  ServiceManager* myServiceManager;
+  ServiceManager* m_ServiceManager;
 
 private slots:
   void exit();

@@ -9,6 +9,7 @@ Receiver::Receiver(QObject *parent)
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
   m_Logger = new Logger("INFO");
 }
+
 void Receiver::setPort(QSerialPort* port)
 {
   m_SerialPort = port;
@@ -31,7 +32,6 @@ void Receiver::receive()
     m_Logger->info(m_Metric);
     emit metricsReceived(m_Metric);
   }
-
 }
 
 Metrics Receiver::parseMessage(const QByteArray& message)
@@ -84,7 +84,7 @@ void Receiver::startReceiving()
   m_Timer->start(500);
 }
 
-void Receiver::receiveConnect()
+/*void Receiver::receiveConnect()
 {
   connect(m_Timer, SIGNAL(timeout()), this, SLOT(receive()));
-}
+}*/

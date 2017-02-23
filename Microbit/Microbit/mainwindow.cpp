@@ -2,15 +2,11 @@
 MainWindow::MainWindow(QObject* application, QWidget *parent)
   : QMainWindow(parent)
 {
-  myServiceManager = new ServiceManager(application);
+  m_ServiceManager = new ServiceManager(application);
   ui.setupUi(this);
   setupConnections();
-  connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), myServiceManager, SLOT(setUpSerialPort(QString)));
+  connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), m_ServiceManager, SLOT(setUpSerialPort(QString)));
   connect(ui.comPortSignInWidget, SIGNAL(comportNameSelected(QString)), this, SLOT(showMatrixPage()));
-}
-
-MainWindow::~MainWindow()
-{
 }
 
 void MainWindow::showCompassPage()

@@ -1,5 +1,5 @@
 #include "sender.h"
-#include <QDebug>
+
 QSerialPort* Sender::m_SerialPort = NULL;
 
 Sender::Sender(QObject *parent)

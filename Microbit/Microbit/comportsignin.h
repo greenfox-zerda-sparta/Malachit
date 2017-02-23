@@ -21,7 +21,6 @@ public:
 
 signals:
   void comportNameSelected(QString);
-  //void connected();
 
 private:
   QComboBox* dropdownList;

@@ -15,12 +15,7 @@ int main(int argc, char** argv) {
 
 #include "mainwindow.h"
 #include <QtWidgets/QApplication>
-
-#include <QDebug>
-#include <QVector>
-#include "signin.h"
 #include "servicemanager.h"
-
 #include "receiver.h"
 
 int main(int argc, char *argv[])

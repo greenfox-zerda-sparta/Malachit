@@ -23,7 +23,6 @@ private:
   QGridLayout* m_MatrixGridLayout;  
   SenderService* m_SenderService;
   double m_Margin;
-
 };
 
 #endif
