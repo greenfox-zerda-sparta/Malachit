@@ -7,7 +7,6 @@ Compass::Compass(QWidget *parent)
   m_Heading = 0;
   setAzimuthHandSize();
   setScaleMarkPoints();
-
   connect(m_ReceiverService.data(), SIGNAL(metricsReceived(Metrics)), this, SLOT(setHeading(Metrics)));
 }
 
@@ -24,7 +23,6 @@ void Compass::paintEvent(QPaintEvent* e)
 void Compass::paintAzimuthHand(QPainter& painter)
 {
   setAzimuthHandSize();
-
   paintHalfOfAzimuthHand(painter, Qt::red, 0);
   paintHalfOfAzimuthHand(painter, Qt::blue, 180);
 }

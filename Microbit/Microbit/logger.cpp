@@ -44,7 +44,7 @@ void Logger::debug(const char* debug)
 {
   if (m_logging->isDebugEnabled())
   {
-    *m_cout << "DEBUG: " << debug << endl;
+    *m_cout << debug << endl;
   }
 }
 
@@ -52,7 +52,7 @@ void Logger::info(const char* info)
 {
   if (m_logging->isInfoEnabled())
   {
-    *m_cout << "INFO: " << info << endl;
+    *m_cout << info << endl;
   }
 }
 
@@ -68,7 +68,7 @@ void Logger::warning(const char* warning)
 {
   if (m_logging->isWarningEnabled())
   {
-    *m_cerr << "WARNING: " << warning << endl;
+    *m_cerr << warning << endl;
   }
 }
 
@@ -76,6 +76,6 @@ void Logger::critical(const char* critical)
 {
   if (m_logging->isCriticalEnabled())
   {
-    *m_cerr << "CRITICAL: " << critical << endl;
+    *m_cerr << critical << endl;
   }
 }

@@ -22,17 +22,19 @@ public slots:
 
 public: 
   static void setPort(QSharedPointer<QSerialPort> port);
+  static void createTimer(QObject *parent);
+  static void startReceiving();
+
 private:
-  QScopedPointer<QTimer> m_Timer;
+  static QTimer* m_Timer;
   QScopedPointer<Logger> m_Logger;
   static QSharedPointer<QSerialPort> m_SerialPort;
   QByteArray m_ReadData;
   Metrics m_Metric;
-
   Metrics parseMessage(const QByteArray& message);
   QVector<std::string> processStringData(const QByteArray& message);
   Metrics convertProcessedStringToMetrics(QVector<std::string> data);
-
+  
 signals:
   void metricsReceived(Metrics);
 };

@@ -12,7 +12,6 @@ namespace Config
 {
   const int preferredAccelerometerVectorSize = 3;
   const int preferredDataSize = 4;
-  const QString serialPort = "COM9";
   const int baudRate = QSerialPort::Baud115200;
 
   const double maxBarValue = 1500.0;

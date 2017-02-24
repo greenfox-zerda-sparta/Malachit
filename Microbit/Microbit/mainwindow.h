@@ -3,22 +3,22 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-#include "accelerometer.h"
-#include "compass.h"
+#include "servicemanager.h"
 
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
 public:
-  MainWindow(QWidget *parent = 0);
-  ~MainWindow();
+  MainWindow(QObject*, QWidget *parent = 0);
 
   void setupConnections();
 
 private:
   Ui::MainWindowClass ui;
-  private slots:
+  ServiceManager* m_ServiceManager;
+
+private slots:
   void exit();
   void showCompassPage();
   void showMatrixPage();
@@ -26,4 +26,4 @@ private:
   void showAccelerometerPlotPage();
 };
 
-#endif // MAINWINDOW_H
+#endif
