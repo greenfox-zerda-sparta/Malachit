@@ -13,10 +13,6 @@ class ServiceManager : public QObject
 public:
   ServiceManager(QObject *parent);
 
-signals:
-  void portNameSet();
-  void serialPortSet();
-
 public slots:
   void setUpSerialPort(QString);
   void shareSerialPort();
