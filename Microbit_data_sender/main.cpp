@@ -34,28 +34,33 @@ ManagedString getMessage()
 
 ManagedString readData()
 {
-    return serial.read(2, ASYNC);
+    int messageSize = 2;
+    return serial.read(messageSize, ASYNC);
 }
 
 void sendData()
 {
     serial.send(getMessage(), ASYNC);
-
 }  
+
+void switchLedMatrix(ManagedString buffer, LedMatrix& myLedMatrix)
+{
+    int offsetToGetInt = 48;
+    myLedMatrix.setLedMatrix((int)buffer.charAt(0) - offsetToGetInt, (int)buffer.charAt(1) - offsetToGetInt);
+    uBit.display.print(myLedMatrix.getMatrixImage());
+}
 
 
 int main()
 {
     uBit.init();
-
     LedMatrix myLedMatrix;
     while(1)
     {   
         ManagedString buffer = readData();
         if (buffer.length() != 0)
         {
-            myLedMatrix.setLedMatrix((int)buffer.charAt(0) - 48, (int)buffer.charAt(1) - 48);
-            uBit.display.print(myLedMatrix.getMatrixImage());
+            switchLedMatrix(buffer, myLedMatrix);
         }
         sendData();
         uBit.sleep(500);
