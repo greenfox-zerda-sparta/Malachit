@@ -5,7 +5,6 @@ QVector<QString> logLevels = { "DEBUG", "INFO", "WARNING", "CRITICAL" };
 
 Logger::Logger(const char* category) {
   m_environment = QProcessEnvironment::systemEnvironment();
-  m_logLevel = m_environment.value("LOG", category);
   m_logLevel = category;
   m_cout = new QTextStream(stdout);
   m_cerr = new QTextStream(stderr);
