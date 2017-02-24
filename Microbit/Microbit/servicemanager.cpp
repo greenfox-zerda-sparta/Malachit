@@ -22,5 +22,4 @@ void ServiceManager::shareSerialPort()
   Receiver::setPort(m_SharedPort);
   Sender::setPort(m_SharedPort);
   Receiver::startReceiving();
-  emit serialPortSet();
 }
