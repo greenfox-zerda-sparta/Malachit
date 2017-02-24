@@ -1,13 +1,10 @@
 #ifndef SERVICEMANAGER_H
 #define SERVICEMANAGER_H
 
-#include <QObject>
 #include "receiverservice.h"
 #include "senderservice.h"
 #include "receiver.h"
 #include "sender.h"
-#include "config.h"
-#include <QtSerialPort/QSerialPort>
 
 class ServiceManager : public QObject
 {
@@ -15,7 +12,14 @@ class ServiceManager : public QObject
 
 public:
   ServiceManager(QObject *parent);
-  ~ServiceManager();
+
+signals:
+  void portNameSet();
+  void serialPortSet();
+
+public slots:
+  void setUpSerialPort(QString);
+  void shareSerialPort();
 
 private:
   QSharedPointer<QSerialPort> m_SharedPort;

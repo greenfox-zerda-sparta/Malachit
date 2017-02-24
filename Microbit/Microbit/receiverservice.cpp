@@ -7,14 +7,12 @@ ReceiverService::ReceiverService(QObject *parent)
 {
   connect(m_Receiver, SIGNAL(metricsReceived(Metrics)), this, SLOT(receive(Metrics)));
 }
-ReceiverService::~ReceiverService()
-{
 
-}
 void ReceiverService::receive(Metrics data)
 {
   emit metricsReceived(data);
 }
+
 void ReceiverService::setReceiver(QObject *parent)
 {
   m_Receiver = new Receiver(parent);

@@ -24,12 +24,23 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="comPortSignInPage">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="comPortSingInWidgetLayout">
+          <item>
+           <widget class="ComPortSignIn" name="comPortSignInWidget" native="true"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="matrixPage">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="matrixWidgetLayout">
           <item>
            <widget class="Matrix" name="matrixWidget" native="true"/>
           </item>
@@ -238,6 +249,11 @@
    <extends>QWidget</extends>
    <header>accelerometerplot.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ComPortSignIn</class>
+   <extends>QWidget</extends>
+   <header>comportsignin.h</header>
   </customwidget>
  </customwidgets>
  <resources>

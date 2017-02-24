@@ -1,5 +1,5 @@
 #include "sender.h"
-#include <QDebug>
+
 QSharedPointer<QSerialPort> Sender::m_SerialPort;
 
 Sender::Sender(QObject *parent)
@@ -12,6 +12,7 @@ void Sender::setPort(QSharedPointer<QSerialPort> port)
 {
   m_SerialPort = port;
 }
+
 void Sender::sendData(int row, int column)
 {
   QString message = QString::number(row) + QString::number(column);

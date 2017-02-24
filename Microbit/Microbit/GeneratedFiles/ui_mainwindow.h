@@ -29,6 +29,7 @@
 #include "accelerometer.h"
 #include "accelerometerplot.h"
 #include "compass.h"
+#include "comportsignin.h"
 #include "matrix.h"
 
 QT_BEGIN_NAMESPACE
@@ -44,9 +45,13 @@ public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QStackedWidget *stackedWidget;
+    QWidget *comPortSignInPage;
+    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *comPortSingInWidgetLayout;
+    ComPortSignIn *comPortSignInWidget;
     QWidget *matrixPage;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *matrixWidgetLayout;
     Matrix *matrixWidget;
     QWidget *compassPage;
     QVBoxLayout *verticalLayout;
@@ -100,22 +105,40 @@ public:
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
         stackedWidget->setMinimumSize(QSize(0, 0));
+        comPortSignInPage = new QWidget();
+        comPortSignInPage->setObjectName(QStringLiteral("comPortSignInPage"));
+        verticalLayout_5 = new QVBoxLayout(comPortSignInPage);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        comPortSingInWidgetLayout = new QVBoxLayout();
+        comPortSingInWidgetLayout->setSpacing(6);
+        comPortSingInWidgetLayout->setObjectName(QStringLiteral("comPortSingInWidgetLayout"));
+        comPortSignInWidget = new ComPortSignIn(comPortSignInPage);
+        comPortSignInWidget->setObjectName(QStringLiteral("comPortSignInWidget"));
+
+        comPortSingInWidgetLayout->addWidget(comPortSignInWidget);
+
+
+        verticalLayout_5->addLayout(comPortSingInWidgetLayout);
+
+        stackedWidget->addWidget(comPortSignInPage);
         matrixPage = new QWidget();
         matrixPage->setObjectName(QStringLiteral("matrixPage"));
         gridLayout = new QGridLayout(matrixPage);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        matrixWidgetLayout = new QVBoxLayout();
+        matrixWidgetLayout->setSpacing(6);
+        matrixWidgetLayout->setObjectName(QStringLiteral("matrixWidgetLayout"));
         matrixWidget = new Matrix(matrixPage);
         matrixWidget->setObjectName(QStringLiteral("matrixWidget"));
 
-        verticalLayout_5->addWidget(matrixWidget);
+        matrixWidgetLayout->addWidget(matrixWidget);
 
 
-        gridLayout->addLayout(verticalLayout_5, 0, 0, 1, 1);
+        gridLayout->addLayout(matrixWidgetLayout, 0, 0, 1, 1);
 
         stackedWidget->addWidget(matrixPage);
         compassPage = new QWidget();
@@ -245,7 +268,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);

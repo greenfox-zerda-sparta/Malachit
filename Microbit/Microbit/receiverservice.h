@@ -10,14 +10,16 @@ class ReceiverService : public QObject
 
 public:
   ReceiverService(QObject *parent);
-  ~ReceiverService();
   static void setReceiver(QObject *parent);
+
 private:
   static Receiver* m_Receiver;
+
 public slots:
   void receive(Metrics);
+
 signals:
   void metricsReceived(Metrics);
 };
 
-#endif // RECEIVERSERVICE_H
+#endif
