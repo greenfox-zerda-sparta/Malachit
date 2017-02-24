@@ -37,7 +37,6 @@ private:
   
 signals:
   void metricsReceived(Metrics);
-
 };
 
 #endif

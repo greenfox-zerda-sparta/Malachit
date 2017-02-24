@@ -2,11 +2,9 @@
 #include <QWidget>
 #include <QStringList>
 #include <QComboBox>
-#include <QGridLayout>
 #include <QPushButton>
 #include <QLabel>
 #include <QVector>
-
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
@@ -24,7 +22,6 @@ signals:
 
 private:
   QComboBox* dropdownList;
-  QGridLayout* m_gridLayout;
   QPushButton* connectButton;
   QStringList comPorts;
   QVector<QString> m_Portnames;

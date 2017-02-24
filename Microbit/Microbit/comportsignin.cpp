@@ -7,7 +7,6 @@ ComPortSignIn::ComPortSignIn(QWidget * parent) : QWidget(parent)
     portnames.push_back(serialPortInfo.portName());
   }
   m_Portnames = portnames;
-  m_gridLayout = new QGridLayout;
   createLabel();
   createDropdownList();
   createConnectButton();
@@ -25,17 +24,14 @@ void ComPortSignIn::createLabel()
 void ComPortSignIn::createDropdownList()
 {
   dropdownList = new QComboBox(this);
-  //QStringList comPorts;
   for (unsigned int i = 0; i < m_Portnames.size(); ++i)
   {
     comPorts << m_Portnames[i];
   }
   std::sort(comPorts.begin(), comPorts.end());
-  //comPorts << "COM1" << "COM2" << "COM3" << "COM4" << "COM5" << "COM6" << "COM7" << "COM8" << "COM9" << "COM10";
   dropdownList->addItems(comPorts);
   dropdownList->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   dropdownList->setGeometry(160, 50, 60, 25);
-  //m_gridLayout->addWidget(dropdownList, 0, 0, Qt::AlignCenter);
 }
 
 void ComPortSignIn::createConnectButton()
@@ -43,7 +39,6 @@ void ComPortSignIn::createConnectButton()
   connectButton = new QPushButton(this);
   connectButton->setText("Connect");
   connectButton->setGeometry(160, 80, 60, 25);
-  m_gridLayout->addWidget(connectButton, 1, 1, Qt::AlignLeft);
 }
 
 void ComPortSignIn::onConnectButtonClicked()
