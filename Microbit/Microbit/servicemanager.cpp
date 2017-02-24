@@ -4,8 +4,8 @@ ServiceManager::ServiceManager(QObject *parent)
   : QObject(parent),
   m_SharedPort(new QSerialPort)
 {
-  ReceiverService::setReceiver(parent);
-  SenderService::setSender(parent);
+  ReceiverService::setReceiver(this);
+  SenderService::setSender(this);
   connect(this, SIGNAL(portNameSet()), this, SLOT(shareSerialPort()));
 }
 
